@@ -16,6 +16,7 @@ public:
     void draw(int x, int y){ img.draw(x,y); }
     float getFitness();
     void setFitness(float fit) { fitness = fit; }
+    int getColor(int x, int y);
     DNA getDNA();
     
     DNA dna;

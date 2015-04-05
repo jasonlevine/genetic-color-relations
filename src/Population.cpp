@@ -91,7 +91,9 @@ Population::Population(float m, int num, string imgPath) {
     }
     
     //find the relations of the course image
+    count = true;
     findRelations(srcDNA, colorRelations);
+    count = false;
     perfectScore = numN;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
@@ -317,17 +319,18 @@ void Population::calcFitness(){
 }
 
 
-//-----------------------------------
-int Population::findColor(ofImage img, ofVec2f pos){
-    ofColor col = img.getColor(pos.x, pos.y);
-    
-    int colID;
-    for (colID = 0; colID < colorRelations.size(); colID++){
-        if (colorRelations[colID].mainColor == col) return colID;
-    }
-    
-    return -1; //just in case
-}
+////-----------------------------------
+//int Population::findColor(genImg img, ofVec2f pos){
+//    int i = pos.x + pos.y * srcImg.width;
+//    int col = img.dna.genes[i];
+//    
+//    int colID;
+//    for (colID = 0; colID < colorRelations.size(); colID++){
+//        if (colorRelations[colID].mainColor == col) return colID;
+//    }
+//    
+//    return -1; //just in case
+//}
 
 
 int Population::getGenerations() {
@@ -431,7 +434,7 @@ void Population::findRelations(genImg &img, vector<colorTable> &colorT){
         int bottomID = findColor(img.getColor(x,h-1), colorT);
         
         for (int n = 0; n < nPos.size()-3; n++){
-            findNColor(bottomID, img.getColor(x+nPos[n].x, h-1+nPos[n].y), colorT,count);
+            findNColor(bottomID, img.getColor(x+nPos[n].x, h-1+nPos[n].y), colorT);
         }
     }
     
@@ -462,7 +465,7 @@ void Population::findRelations(genImg &img, vector<colorTable> &colorT){
 
 
 //--------------------------------------------------------------
-int Population::findColor(ofColor col, vector<colorTable> &colorT) {
+int Population::findColor(int col, vector<colorTable> &colorT) {
     bool colFound = false;
     int colID = -1;
     
@@ -489,7 +492,7 @@ int Population::findColor(ofColor col, vector<colorTable> &colorT) {
 }
 
 //--------------------------------------------------------------
-void Population::findNColor(int colID, ofColor nCol, vector<colorTable> &colorT){
+void Population::findNColor(int colID, int nCol, vector<colorTable> &colorT){
     bool nColFound = false;
     
     //check if the neigbor is in the neighbor list
@@ -506,7 +509,7 @@ void Population::findNColor(int colID, ofColor nCol, vector<colorTable> &colorT)
         colorT[colID].neighborColors.push_back(nCol);
         colorT[colID].neighborCount.push_back(1);
         
-        if (count) numN++;
+   if (count) numN++;
     }
 
 }

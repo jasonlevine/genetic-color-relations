@@ -40,7 +40,7 @@ public:
     //GA
     void calcPerfectScore();
     void calcFitness();
-    int findColor(ofImage img, ofVec2f pos);
+    //int findColor(genImg img, ofVec2f pos);
     int incFitness(ofImage img, int colID, ofVec2f pos, ofVec2f neighbor);
     void selection();
     void reproduction();
@@ -53,6 +53,7 @@ public:
     void saveSession();
     void loadSession();
     
+    bool count;
     int numN;
     float perfectScore;
     

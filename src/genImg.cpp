@@ -41,3 +41,8 @@ DNA genImg::getDNA() {
 float genImg::getFitness() {
     return fitness;
 }
+
+int genImg::getColor(int x, int y){
+    int i = x + y * img.width;
+    return dna.genes[i];
+}
