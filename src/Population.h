@@ -24,9 +24,9 @@ class Population {
 public:
     
     Population(float m, int num, string imgPath);
-    void findRelations(genImg &img, vector<colorTable> &colorT, bool count);
-    int findColor(int col, vector<colorTable> &colorT, bool count);
-    void findNColor(int colID, int nCol, vector<colorTable> &colorT, bool count);
+    void findRelations(genImg &img, vector<colorTable> &colorT);
+    int findColor(int col, vector<colorTable> &colorT);
+    void findNColor(int colID, int nCol, vector<colorTable> &colorT);
     
     //sort
     static bool sortOnLightness(const ofColor &a, const ofColor &b);

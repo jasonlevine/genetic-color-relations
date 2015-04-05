@@ -37,8 +37,7 @@ Population::Population(float m, int num, string imgPath) {
     numN = 0;
     
     
-    srcImg.loadImage(imgPath);
-    
+    //setup neighbor positions
     nPos.assign(8, ofVec2f(0,0));
     
     nPos[0].set(-1, -1); //top left
@@ -50,7 +49,10 @@ Population::Population(float m, int num, string imgPath) {
     nPos[6].set(0, 1); // bottom
     nPos[7].set(1, 1); // bottom right
     
+    //load image
+    srcImg.loadImage(imgPath);
     
+    //set up list of all unique colors
     for (int x = 0; x < srcImg.getWidth(); x++) {
         for (int y = 0; y < srcImg.getHeight(); y++) {
             ofColor col = srcImg.getColor(x,y);
@@ -70,7 +72,8 @@ Population::Population(float m, int num, string imgPath) {
     }
     
     
-//    DNA srcDNA;
+//  make a genImg that has the DNA to express the source image
+    //todo: make this dna and then pass the dna to a genimg afterwards
     genImg srcDNA(srcImg, 1, imgColors.size());
     
     for (int g = 0; g < srcDNA.dna.genes.size(); g++){
@@ -87,16 +90,13 @@ Population::Population(float m, int num, string imgPath) {
         }
     }
     
-    
-    
-    
-    
-    findRelations(srcDNA, colorRelations, true);
+    //find the relations of the course image
+    findRelations(srcDNA, colorRelations);
     perfectScore = numN;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
         population.push_back(genImg(srcImg, 2, imgColors.size()));
-        population[i].expressGenes(imgColors);
+        //population[i].expressGenes(imgColors);
     }
 
 }
@@ -274,7 +274,7 @@ void Population::calcFitness(){
             genImgColors.push_back(newNc);
         }
         
-        findRelations(population[i].img, genImgColors, false);
+        findRelations(population[i], genImgColors);
         
         population[i].fitness = 0;
         float correct = 0;
@@ -283,7 +283,7 @@ void Population::calcFitness(){
         for (int c = 0; c < colorRelations.size(); c++){
             //plus one for every similar relationship
             for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
-                ofColor nCol = colorRelations[c].neighborColors[nc];
+                int nCol = colorRelations[c].neighborColors[nc];
                 for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
                     if (genImgColors[c].neighborColors[gnc] == nCol){
                         //population[i].fitness++;
@@ -295,7 +295,7 @@ void Population::calcFitness(){
             
             //minus one for every difference
             for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
-                ofColor gnCol = genImgColors[c].neighborColors[gnc];
+                int gnCol = genImgColors[c].neighborColors[gnc];
                 bool gnColFound = false;
                 
                 for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
