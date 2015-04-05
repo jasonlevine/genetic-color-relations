@@ -107,14 +107,15 @@ Population::Population(float m, int num, string imgPath) {
 void Population::draw() {
 //    srcImg.draw(0,150, 300, 300);
 //    ofSetColor(255);
-    float spacing = 10;
+    float spacing = 30;
+    float scale = 10;
 //    //draw population
     //float scale = ofGetWidth() / ((srcImg.width * 2) * population.size() * 0.5);
     for (int i = 0; i < population.size()*0.5; i++) {
-        population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
-        population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
-        //drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
-//        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 120, scale);
+        //population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
+        //population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
+        drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
+        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 150, scale);
 //        ofDrawBitmapString(ofToString(population[i].fitness), i * ((srcImg.width + 2) * scale), srcImg.getHeight()*2 + 100);
     }
     

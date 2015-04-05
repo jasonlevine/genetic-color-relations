@@ -4,14 +4,14 @@
 void ofApp::setup(){
     ofSetVerticalSync(false);
     
-    int popmax = 10;
+    int popmax = 20;
     float mutationRate = 0.0001;
     GA = new Population(mutationRate,popmax,"gradient.jpg");
     
-//    GA->calcFitness();
-//    GA->selection();
-//    GA->reproduction();
-//    GA->calcFitness();
+    GA->calcFitness();
+    GA->selection();
+    GA->reproduction();
+    GA->calcFitness();
     
     saveFbo.allocate(640, 480);
     counter = 0;
@@ -21,30 +21,30 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-//    if (GA->getMaxFitness() < GA->perfectScore) {
-////        float t1 = ofGetElapsedTimef();
-//        GA->selection();
-////        cout << "------------------" << endl;
-////        cout << "selection - " << ofGetElapsedTimef() - t1<< endl;
-//        
-////        float t2 = ofGetElapsedTimef();
-//        GA->reproduction();
-////        cout << "reproduction - " << ofGetElapsedTimef() - t2 << endl;
-//        
-//        
-////        float t3 = ofGetElapsedTimef();
-//        GA->calcFitness();
-////        cout << "fitness - " << ofGetElapsedTimef() - t3 << endl;
-//        
-//        
-//        elapsedTime = ofGetElapsedTimef();
-//        seconds = elapsedTime % 60;
-//        minutes = (elapsedTime / 60) % 60;
-//        hours = (elapsedTime / 3600);
-//        
-//
-////        cout  << GA->getMaxFitness() << " " << GA->getAvgFitness() << " -------- " << GA->getGenerations() << endl;
-//    }
+    if (GA->getMaxFitness() < GA->perfectScore) {
+//        float t1 = ofGetElapsedTimef();
+        GA->selection();
+//        cout << "------------------" << endl;
+//        cout << "selection - " << ofGetElapsedTimef() - t1<< endl;
+        
+//        float t2 = ofGetElapsedTimef();
+        GA->reproduction();
+//        cout << "reproduction - " << ofGetElapsedTimef() - t2 << endl;
+        
+        
+//        float t3 = ofGetElapsedTimef();
+        GA->calcFitness();
+//        cout << "fitness - " << ofGetElapsedTimef() - t3 << endl;
+        
+        
+        elapsedTime = ofGetElapsedTimef();
+        seconds = elapsedTime % 60;
+        minutes = (elapsedTime / 60) % 60;
+        hours = (elapsedTime / 3600);
+        
+
+//        cout  << GA->getMaxFitness() << " " << GA->getAvgFitness() << " -------- " << GA->getGenerations() << endl;
+    }
 
     
     
@@ -55,7 +55,7 @@ void ofApp::update(){
 void ofApp::draw(){
     saveFbo.begin();
     ofClear(0);
-    ofBackground(120);
+    ofBackground(120, 20 , 0);
     
     GA->draw();
     
@@ -65,16 +65,16 @@ void ofApp::draw(){
     saveFbo.end();
 
     
-    if (GA->getMaxFitness() > lastMaxFitness) {
-        ofImage saveImage;
-        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
-        saveFbo.readToPixels(saveImage.getPixelsRef());
-        saveImage.update();
-        saveImage.saveImage("sequence9/evo" + ofToString(counter) + ".png");
-        
-        counter++;
-        lastMaxFitness = GA->getMaxFitness();
-    }
+//    if (GA->getMaxFitness() > lastMaxFitness) {
+//        ofImage saveImage;
+//        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
+//        saveFbo.readToPixels(saveImage.getPixelsRef());
+//        saveImage.update();
+//        saveImage.saveImage("sequence9/evo" + ofToString(counter) + ".png");
+//        
+//        counter++;
+//        lastMaxFitness = GA->getMaxFitness();
+//    }
     
     ofSetColor(255);
     saveFbo.draw(0,0);
