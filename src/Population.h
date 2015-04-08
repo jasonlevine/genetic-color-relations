@@ -64,10 +64,6 @@ private:
     
     ofImage srcImg, heatmap;
     vector<colorTable> colorRelations;
-    vector<colorTable> fittestColorRelations;
     vector<ofColor> imgColors;
     vector<ofVec2f> nPos;
-    
-    
-    
 };

@@ -236,7 +236,7 @@ void Population::calcFitness(){
 //                }
 //            }
             
-            //minus one for every difference
+            
             for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
                 int gnCol = genImgColors[c].neighborColors[gnc];
                 bool gnColFound = false;
@@ -244,13 +244,13 @@ void Population::calcFitness(){
                 for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
                     if (colorRelations[c].neighborColors[nc] == gnCol){
                         gnColFound = true;
-                        correct++;
+                        correct++; //plus one for every similar relationship
                         break;
                     }
                 }
                 
                 if (!gnColFound) {
-                    correct -= genImgColors[c].neighborCount[gnc] * 0.05;
+                    correct -= genImgColors[c].neighborCount[gnc] * 0.05; //minus 0.05 for every difference
                 }
             }
             
