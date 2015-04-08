@@ -91,12 +91,13 @@ Population::Population(float m, int num, string imgPath) {
     perfectScore = numN-1;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 1, imgColors.size()));
+        population.push_back(genImg(srcImg, 2, imgColors.size()));
     }
 
 }
 
-
+#pragma mark draw-routines
+//--------------------------------------------------------------
 void Population::draw() {
 
     float spacing = 30;
@@ -112,8 +113,6 @@ void Population::draw() {
             break;
         }
     }
-
-
 }
 
 //--------------------------------------------------------------
@@ -149,7 +148,7 @@ void Population::drawBreakdown(vector<colorTable> &colorT, float x, float y, flo
     
 }
 
-
+#pragma mark GA
 // Generate a mating pool
 void Population::selection() {
     // Clear the ArrayList
@@ -226,16 +225,16 @@ void Population::calcFitness(){
         
         for (int c = 0; c < colorRelations.size(); c++){
             //plus one for every similar relationship
-            for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
-                int nCol = colorRelations[c].neighborColors[nc];
-                for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
-                    if (genImgColors[c].neighborColors[gnc] == nCol){
-                        //population[i].fitness++;
-                        correct++;
-                        break;
-                    }
-                }
-            }
+//            for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
+//                int nCol = colorRelations[c].neighborColors[nc];
+//                for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
+//                    if (genImgColors[c].neighborColors[gnc] == nCol){
+//                        //population[i].fitness++;
+//                        correct++;
+//                        break;
+//                    }
+//                }
+//            }
             
             //minus one for every difference
             for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
@@ -245,6 +244,7 @@ void Population::calcFitness(){
                 for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
                     if (colorRelations[c].neighborColors[nc] == gnCol){
                         gnColFound = true;
+                        correct++;
                         break;
                     }
                 }
@@ -261,25 +261,15 @@ void Population::calcFitness(){
 }
 
 
-////-----------------------------------
-//int Population::findColor(genImg img, ofVec2f pos){
-//    int i = pos.x + pos.y * srcImg.width;
-//    int col = img.dna.genes[i];
-//    
-//    int colID;
-//    for (colID = 0; colID < colorRelations.size(); colID++){
-//        if (colorRelations[colID].mainColor == col) return colID;
-//    }
-//    
-//    return -1; //just in case
-//}
 
-
+#pragma mark getters
+//--------------------------------------------------------------
 int Population::getGenerations() {
     return generations;
 }
 
 // Find highest fintess for the population
+//--------------------------------------------------------------
 float Population::getMaxFitness() {
     float record = -100000000;
     for (int i = 0; i < population.size(); i++) {
@@ -291,6 +281,7 @@ float Population::getMaxFitness() {
 }
 
 // Find lowest fintess for the population
+//--------------------------------------------------------------
 float Population::getMinFitness() {
     float record = getMaxFitness();
     for (int i = 0; i < population.size(); i++) {
@@ -301,6 +292,7 @@ float Population::getMinFitness() {
     return record;
 }
 
+//--------------------------------------------------------------
 float Population::getAvgFitness() {
     float avg = 0;
     for (int i = 0; i < population.size(); i++) {
@@ -312,7 +304,7 @@ float Population::getAvgFitness() {
 }
 
 
-
+#pragma mark color-relations
 //--------------------------------------------------------------
 void Population::findRelations(genImg &img, vector<colorTable> &colorT){
 // 
@@ -456,6 +448,7 @@ void Population::findNColor(int colID, int nCol, vector<colorTable> &colorT){
 
 }
 
+#pragma mark load-save
 //--------------------------------------------------------------
 void Population::saveSession() {
     session.clear();
