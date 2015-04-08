@@ -21,12 +21,6 @@
 
 #define t ofGetElapsedTimef()
 #define div "--------------------"
-
-
-//--------------------------------------------------------------
-bool Population::sortOnLightness(const ofColor &a, const ofColor &b){
-    return a.getLightness() < b.getLightness();
-}
    
 // Create the population
 //--------------------------------------------------------------
@@ -98,33 +92,15 @@ Population::Population(float m, int num, string imgPath) {
     
     for (int i = 0; i < num; i++) {
         population.push_back(genImg(srcImg, 1, imgColors.size()));
-        //population[i].expressGenes(imgColors);
     }
 
 }
 
 
 void Population::draw() {
-//    srcImg.draw(0,150, 300, 300);
-//    ofSetColor(255);
+
     float spacing = 30;
     float scale = 10;
-//    //draw population
-    //float scale = ofGetWidth() / ((srcImg.width * 2) * population.size() * 0.5);
-//    for (int i = 0; i < population.size()*0.5; i++) {
-//        //population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
-//        //population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
-//        drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
-//        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 150, scale);
-////        ofDrawBitmapString(ofToString(population[i].fitness), i * ((srcImg.width + 2) * scale), srcImg.getHeight()*2 + 100);
-//    }
-    
-    //draw source image
-//    drawImgScaled(srcImg,25, 150, 40);
-//    drawBreakdown(colorRelations, 350, 150, 25);
-    
-//    drawImgScaled(srcImg,10,100, 1);
-//    drawImgScaled(evoImg,0, 15, 20);
     
     srcImg.draw(100, 15);
     
@@ -133,42 +109,6 @@ void Population::draw() {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
             population[i].img.draw(300 + 150 * 2, 15);
-//            drawImgScaled(population[i].img,400, 100, 1);
-//            for (int x = 0; x < 5; x++) {
-//                for (int y = 0; y < 5; y++) {
-//                    float x1, y1, w, h;
-//                    if (x%2 == 0) {
-//                        x1 = x;
-//                        w = population[i].img.width;
-//                    }
-//                    else {
-//                        x1 = x+1;
-//                        w = -population[i].img.width;
-//                    }
-//                    if (y%2 == 0) {
-//                        y1 = y;
-//                        h = population[i].img.height;
-//                    }
-//                    else {
-//                        y1 = y+1;
-//                        h = -population[i].img.height;
-//                    }
-//
-//                    
-//                    population[i].img.draw(x1*64*2, y1*48*2, w, h);
-//                }
-//            }
-//            population[i].img.draw(0, 0);
-//            population[i].img.draw(0, 0);
-//            population[i].img.draw(0, 0);
-//            fittestColorRelations.clear();
-//            for (int c = 0; c < colorRelations.size(); c++){
-//                colorTable newNc;
-//                newNc.mainColor = colorRelations[c].mainColor;
-//                fittestColorRelations.push_back(newNc);
-//            }
-//            findRelations(population[i].img, fittestColorRelations, false);
-//            drawBreakdown(fittestColorRelations, 350, 500, 25);
             break;
         }
     }
