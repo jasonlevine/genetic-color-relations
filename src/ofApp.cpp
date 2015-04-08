@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofSetVerticalSync(false);
     
     int popmax = 20;
-    float mutationRate = 0.0001;
+    float mutationRate = 0.0005;
     GA = new Population(mutationRate,popmax,"gradient.jpg");
     
     GA->calcFitness();
@@ -53,7 +53,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    saveFbo.begin();
+//    saveFbo.begin();
     ofClear(0);
     ofBackground(120, 20 , 0);
     
@@ -62,7 +62,7 @@ void ofApp::draw(){
     ofSetColor(255);
     ofDrawBitmapString( ofToString(GA->getMaxFitness(),1) + "/" + ofToString(GA->perfectScore) + " --- gen " + ofToString(GA->getGenerations()) + " --- " + ofToString(hours) + " hours " + ofToString(minutes) + " minutes " + ofToString(seconds) + " seconds", 10, 10);
     
-    saveFbo.end();
+//    saveFbo.end();
 
     
 //    if (GA->getMaxFitness() > lastMaxFitness) {
@@ -77,7 +77,7 @@ void ofApp::draw(){
 //    }
     
     ofSetColor(255);
-    saveFbo.draw(0,0);
+//    saveFbo.draw(0,0);
 }
 
 //--------------------------------------------------------------

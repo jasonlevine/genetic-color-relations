@@ -94,10 +94,10 @@ Population::Population(float m, int num, string imgPath) {
     count = true;
     findRelations(srcDNA, colorRelations);
     count = false;
-    perfectScore = numN;//pow(2, (float)numN);
+    perfectScore = numN-1;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 2, imgColors.size()));
+        population.push_back(genImg(srcImg, 1, imgColors.size()));
         //population[i].expressGenes(imgColors);
     }
 
@@ -111,19 +111,19 @@ void Population::draw() {
     float scale = 10;
 //    //draw population
     //float scale = ofGetWidth() / ((srcImg.width * 2) * population.size() * 0.5);
-    for (int i = 0; i < population.size()*0.5; i++) {
-        //population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
-        //population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
-        drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
-        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 150, scale);
-//        ofDrawBitmapString(ofToString(population[i].fitness), i * ((srcImg.width + 2) * scale), srcImg.getHeight()*2 + 100);
-    }
+//    for (int i = 0; i < population.size()*0.5; i++) {
+//        //population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
+//        //population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
+//        drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
+//        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 150, scale);
+////        ofDrawBitmapString(ofToString(population[i].fitness), i * ((srcImg.width + 2) * scale), srcImg.getHeight()*2 + 100);
+//    }
     
     //draw source image
 //    drawImgScaled(srcImg,25, 150, 40);
 //    drawBreakdown(colorRelations, 350, 150, 25);
     
-//    drawImgScaled(srcImg,10,400, 20);
+//    drawImgScaled(srcImg,10,100, 1);
 //    drawImgScaled(evoImg,0, 15, 20);
     
     srcImg.draw(100, 15);
@@ -131,8 +131,9 @@ void Population::draw() {
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
+            population[i].expressGenes(imgColors);
             population[i].img.draw(300 + 150 * 2, 15);
-//            drawImgScaled(population[i].img,400, 10, 20);
+//            drawImgScaled(population[i].img,400, 100, 1);
 //            for (int x = 0; x < 5; x++) {
 //                for (int y = 0; y < 5; y++) {
 //                    float x1, y1, w, h;
@@ -258,7 +259,7 @@ void Population::reproduction() {
         child.mutate(mutationRate);
         // Fill the new population with the new child
         population[i].dna = child;
-        population[i].expressGenes(imgColors);
+        //population[i].expressGenes(imgColors);
     }
     generations++;
 }
@@ -405,8 +406,8 @@ void Population::findRelations(genImg &img, vector<colorTable> &colorT){
     ofVec2f brc = ofVec2f(w-1, h-1);
     int bottomRightID = findColor(img.getColor(brc.x, brc.y), colorT);
     findNColor(bottomRightID, img.getColor(brc.x + left.x, brc.y + left.y), colorT);
-    findNColor(bottomRightID, img.getColor(brc.x + bottomLeft.x, brc.y + topLeft.y), colorT);
-    findNColor(bottomRightID, img.getColor(brc.x + bottom.x, brc.y + bottom.y), colorT);
+    findNColor(bottomRightID, img.getColor(brc.x + topLeft.x, brc.y + topLeft.y), colorT);
+    findNColor(bottomRightID, img.getColor(brc.x + top.x, brc.y + top.y), colorT);
 //    cout << div << endl;
 //    cout << "corners - " << t - t1 << endl;
 
@@ -510,7 +511,7 @@ void Population::findNColor(int colID, int nCol, vector<colorTable> &colorT){
         colorT[colID].neighborColors.push_back(nCol);
         colorT[colID].neighborCount.push_back(1);
         
-   if (count) numN++;
+        if (count) numN++;
     }
 
 }
