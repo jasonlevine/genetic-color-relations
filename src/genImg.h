@@ -5,10 +5,10 @@
 //  Created by Jason Levine on 2013-05-29.
 //
 //
+
+#pragma once
+
 #include "DNA.h"
-
-
-
 class genImg {
 public:
     genImg(ofImage &src, int scale, int nColors);

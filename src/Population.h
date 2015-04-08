@@ -8,16 +8,15 @@
 
 #include "ofMain.h"
 #include "genImg.h"
+#include "colorRelations.h"
+
 #include "ofxXmlSettings.h"
 
 
-struct colorTable {
-    int mainColor;
-    vector<int> neighborColors;
-    vector<int> neighborCount;
-};
-
-
+//struct neighbors {
+//    int color;
+//    int count;
+//};
 
 
 class Population {
@@ -25,11 +24,7 @@ public:
     
     Population(float m, int num, string imgPath);
     
-    //find relations
-    void findRelations(genImg &img, vector<colorTable> &colorT);
-    int findColor(int col, vector<colorTable> &colorT);
-    void findNColor(int colID, int nCol, vector<colorTable> &colorT);
-    void generateHeatmap(genImg &img, vector<colorTable> &colorT);
+//    void generateHeatmap(genImg &img, vector<colorTable> &colorT);
     
     //draw routines
     void draw();
@@ -63,7 +58,9 @@ private:
     int generations;             // Number of generations
     
     ofImage srcImg, heatmap;
-    vector<colorTable> colorRelations;
+    
+    vector<colorTable> colorTables;
     vector<ofColor> imgColors;
-    vector<ofVec2f> nPos;
+    
+    colorRelations CR;
 };

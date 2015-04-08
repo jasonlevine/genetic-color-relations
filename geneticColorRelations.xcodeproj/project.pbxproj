@@ -233,15 +233,15 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				90C794191978D09200276B2F /* Population.cpp */,
+				90C7941A1978D09200276B2F /* Population.h */,
 				90C7941D1978D1E100276B2F /* genImg.cpp */,
 				90C7941E1978D1E100276B2F /* genImg.h */,
 				90C794171978D09200276B2F /* DNA.cpp */,
 				90C794181978D09200276B2F /* DNA.h */,
-				90C794191978D09200276B2F /* Population.cpp */,
-				90C7941A1978D09200276B2F /* Population.h */,
-				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				904733231AD500B20002E2CE /* colorRelations.cpp */,
 				904733241AD500B20002E2CE /* colorRelations.h */,
 			);

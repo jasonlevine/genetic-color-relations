@@ -5,7 +5,7 @@
 //  Created by Jason Levine on 2013-05-28.
 //
 //
-
+#pragma once
 #include "ofMain.h"
 
 class DNA {
