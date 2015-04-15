@@ -86,13 +86,15 @@ void Population::draw() {
     float spacing = 30;
     float scale = 10;
     
-    srcImg.draw(100, 15);
+    //srcImg.draw(100, 15);
+    drawImgScaled(srcImg, 50, 50, 5);
     
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            population[i].img.draw(300 + 150 * 2, 15);
+            drawImgScaled(population[i].img, 250, 50, 5);
+            //population[i].img.draw(300 + 150 * 2, 15);
             break;
         }
     }

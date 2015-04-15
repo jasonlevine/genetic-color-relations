@@ -33,5 +33,7 @@ public:
     ofFbo saveFbo;
     int counter;
     
+    bool bDraw;
+    
     
 };
