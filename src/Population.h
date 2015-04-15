@@ -13,12 +13,6 @@
 #include "ofxXmlSettings.h"
 
 
-//struct neighbors {
-//    int color;
-//    int count;
-//};
-
-
 class Population {
 public:
     

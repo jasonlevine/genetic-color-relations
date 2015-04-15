@@ -141,7 +141,6 @@ void Population::drawBreakdown(vector<colorTable> &colorT, float x, float y, flo
 #pragma mark GA
 // Generate a mating pool
 void Population::selection() {
-    // Clear the ArrayList
     matingPool.clear();
     
     // Calculate total fitness of whole population
@@ -165,7 +164,6 @@ void Population::selection() {
                 matingPool.push_back(population[i]);
             }
         }
-        
     }
 }
 
@@ -194,12 +192,13 @@ void Population::reproduction() {
 }
 
 void Population::calcFitness(){
-    dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     int start = 0;
     int end = population.size();
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
         
+        //make an empty colortable
         vector<colorTable> genImgColors;
         for (int i = 0; i < imgColors.size(); i++) {
             colorTable temp;
@@ -207,32 +206,15 @@ void Population::calcFitness(){
             genImgColors.push_back(temp);
         }
         
-//        for (int c = 0; c < colorTables.size(); c++){
-//            colorTable newNc;
-//            newNc.mainColor = colorTables[c].mainColor;
-//            genImgColors.push_back(newNc);
-//        }
-        
+        //find relations of pop[i]
         CR.findRelations(population[i], genImgColors);
         
         population[i].fitness = 0;
         float correct = 0;
         
         
+        //calc fitness
         for (int c = 0; c < colorTables.size(); c++){
-            //plus one for every similar relationship
-//            for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
-//                int nCol = colorRelations[c].neighborColors[nc];
-//                for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
-//                    if (genImgColors[c].neighborColors[gnc] == nCol){
-//                        //population[i].fitness++;
-//                        correct++;
-//                        break;
-//                    }
-//                }
-//            }
-            
-            
             for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
                 int gnCol = genImgColors[c].neighborColors[gnc];
                 bool gnColFound = false;
@@ -249,7 +231,6 @@ void Population::calcFitness(){
                     correct -= genImgColors[c].neighborCount[gnc] * 0.05; //minus 0.05 for every difference
                 }
             }
-            
         }
         
         population[i].fitness = correct;
