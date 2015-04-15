@@ -21,12 +21,6 @@
 
 #define t ofGetElapsedTimef()
 #define div "--------------------"
-
-
-//--------------------------------------------------------------
-bool Population::sortOnLightness(const ofColor &a, const ofColor &b){
-    return a.getLightness() < b.getLightness();
-}
    
 // Create the population
 //--------------------------------------------------------------
@@ -98,82 +92,28 @@ Population::Population(float m, int num, string imgPath) {
     
     for (int i = 0; i < num; i++) {
         population.push_back(genImg(srcImg, 1, imgColors.size()));
-        //population[i].expressGenes(imgColors);
     }
 
 }
 
-
+#pragma mark draw-routines
+//--------------------------------------------------------------
 void Population::draw() {
-//    srcImg.draw(0,150, 300, 300);
-//    ofSetColor(255);
+
     float spacing = 30;
     float scale = 10;
-//    //draw population
-    //float scale = ofGetWidth() / ((srcImg.width * 2) * population.size() * 0.5);
-//    for (int i = 0; i < population.size()*0.5; i++) {
-//        //population[i].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 30);
-//        //population[i + population.size()*0.5].img.draw(i * (population[i].img.width + spacing) + spacing + 10, 65 + srcImg.width * 2);
-//        drawImgScaled(population[i].img, i * ((srcImg.width * 2 + 5) * scale), 30, scale);
-//        drawImgScaled(population[i + population.size()*0.5].img, i * ((srcImg.width * 2 + 5) * scale), 150, scale);
-////        ofDrawBitmapString(ofToString(population[i].fitness), i * ((srcImg.width + 2) * scale), srcImg.getHeight()*2 + 100);
-//    }
-    
-    //draw source image
-//    drawImgScaled(srcImg,25, 150, 40);
-//    drawBreakdown(colorRelations, 350, 150, 25);
+
     
     drawImgScaled(srcImg,10,100, 3);
-//    drawImgScaled(evoImg,0, 15, 20);
-    
-    srcImg.draw(100, 15);
     
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            population[i].img.draw(300 + 150 * 2, 15);
             drawImgScaled(population[i].img,250, 100, 3);
-//            for (int x = 0; x < 5; x++) {
-//                for (int y = 0; y < 5; y++) {
-//                    float x1, y1, w, h;
-//                    if (x%2 == 0) {
-//                        x1 = x;
-//                        w = population[i].img.width;
-//                    }
-//                    else {
-//                        x1 = x+1;
-//                        w = -population[i].img.width;
-//                    }
-//                    if (y%2 == 0) {
-//                        y1 = y;
-//                        h = population[i].img.height;
-//                    }
-//                    else {
-//                        y1 = y+1;
-//                        h = -population[i].img.height;
-//                    }
-//
-//                    
-//                    population[i].img.draw(x1*64*2, y1*48*2, w, h);
-//                }
-//            }
-//            population[i].img.draw(0, 0);
-//            population[i].img.draw(0, 0);
-//            population[i].img.draw(0, 0);
-//            fittestColorRelations.clear();
-//            for (int c = 0; c < colorRelations.size(); c++){
-//                colorTable newNc;
-//                newNc.mainColor = colorRelations[c].mainColor;
-//                fittestColorRelations.push_back(newNc);
-//            }
-//            findRelations(population[i].img, fittestColorRelations, false);
-//            drawBreakdown(fittestColorRelations, 350, 500, 25);
             break;
         }
     }
-
-
 }
 
 //--------------------------------------------------------------
@@ -209,7 +149,7 @@ void Population::drawBreakdown(vector<colorTable> &colorT, float x, float y, flo
     
 }
 
-
+#pragma mark GA
 // Generate a mating pool
 void Population::selection() {
     // Clear the ArrayList
@@ -286,18 +226,18 @@ void Population::calcFitness(){
         
         for (int c = 0; c < colorRelations.size(); c++){
             //plus one for every similar relationship
-            for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
-                int nCol = colorRelations[c].neighborColors[nc];
-                for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
-                    if (genImgColors[c].neighborColors[gnc] == nCol){
-                        //population[i].fitness++;
-                        correct++;
-                        break;
-                    }
-                }
-            }
+//            for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
+//                int nCol = colorRelations[c].neighborColors[nc];
+//                for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
+//                    if (genImgColors[c].neighborColors[gnc] == nCol){
+//                        //population[i].fitness++;
+//                        correct++;
+//                        break;
+//                    }
+//                }
+//            }
             
-            //minus one for every difference
+            
             for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
                 int gnCol = genImgColors[c].neighborColors[gnc];
                 bool gnColFound = false;
@@ -305,12 +245,13 @@ void Population::calcFitness(){
                 for (int nc = 0; nc < colorRelations[c].neighborColors.size(); nc++){
                     if (colorRelations[c].neighborColors[nc] == gnCol){
                         gnColFound = true;
+                        correct++; //plus one for every similar relationship
                         break;
                     }
                 }
                 
                 if (!gnColFound) {
-                    correct -= genImgColors[c].neighborCount[gnc] * 0.05;
+                    correct -= genImgColors[c].neighborCount[gnc] * 0.05; //minus 0.05 for every difference
                 }
             }
             
@@ -321,25 +262,15 @@ void Population::calcFitness(){
 }
 
 
-////-----------------------------------
-//int Population::findColor(genImg img, ofVec2f pos){
-//    int i = pos.x + pos.y * srcImg.width;
-//    int col = img.dna.genes[i];
-//    
-//    int colID;
-//    for (colID = 0; colID < colorRelations.size(); colID++){
-//        if (colorRelations[colID].mainColor == col) return colID;
-//    }
-//    
-//    return -1; //just in case
-//}
 
-
+#pragma mark getters
+//--------------------------------------------------------------
 int Population::getGenerations() {
     return generations;
 }
 
 // Find highest fintess for the population
+//--------------------------------------------------------------
 float Population::getMaxFitness() {
     float record = -100000000;
     for (int i = 0; i < population.size(); i++) {
@@ -351,6 +282,7 @@ float Population::getMaxFitness() {
 }
 
 // Find lowest fintess for the population
+//--------------------------------------------------------------
 float Population::getMinFitness() {
     float record = getMaxFitness();
     for (int i = 0; i < population.size(); i++) {
@@ -361,6 +293,7 @@ float Population::getMinFitness() {
     return record;
 }
 
+//--------------------------------------------------------------
 float Population::getAvgFitness() {
     float avg = 0;
     for (int i = 0; i < population.size(); i++) {
@@ -372,7 +305,7 @@ float Population::getAvgFitness() {
 }
 
 
-
+#pragma mark color-relations
 //--------------------------------------------------------------
 void Population::findRelations(genImg &img, vector<colorTable> &colorT){
 // 
@@ -516,6 +449,7 @@ void Population::findNColor(int colID, int nCol, vector<colorTable> &colorT){
 
 }
 
+#pragma mark load-save
 //--------------------------------------------------------------
 void Population::saveSession() {
     session.clear();

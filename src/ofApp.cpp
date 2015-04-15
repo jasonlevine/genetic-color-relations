@@ -6,6 +6,7 @@ void ofApp::setup(){
     
     int popmax = 80;
     float mutationRate = 0.0001;
+
     GA = new Population(mutationRate,popmax,"gradient.jpg");
     
     GA->calcFitness();

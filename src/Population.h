@@ -24,26 +24,23 @@ class Population {
 public:
     
     Population(float m, int num, string imgPath);
+    
+    //find relations
     void findRelations(genImg &img, vector<colorTable> &colorT);
     int findColor(int col, vector<colorTable> &colorT);
     void findNColor(int colID, int nCol, vector<colorTable> &colorT);
+    void generateHeatmap(genImg &img, vector<colorTable> &colorT);
     
-    //sort
-    static bool sortOnLightness(const ofColor &a, const ofColor &b);
-    
-    //GUI
+    //draw routines
     void draw();
     void drawImgScaled(ofImage &img, float x, float y, float scale);
     void drawBreakdown(vector<colorTable> &colorT, float x, float y, float scale);
-    
-    int rollover(int mouseX, int mouseY);
+
     //GA
-    void calcPerfectScore();
     void calcFitness();
-    //int findColor(genImg img, ofVec2f pos);
-    int incFitness(ofImage img, int colID, ofVec2f pos, ofVec2f neighbor);
     void selection();
     void reproduction();
+    
     //Getters
     int getGenerations();
     float getMaxFitness();
@@ -65,12 +62,8 @@ private:
     vector<genImg> matingPool;   // ArrayList which we will use for our "mating pool"
     int generations;             // Number of generations
     
-    ofImage srcImg;
+    ofImage srcImg, heatmap;
     vector<colorTable> colorRelations;
-    vector<colorTable> fittestColorRelations;
     vector<ofColor> imgColors;
     vector<ofVec2f> nPos;
-    
-    
-    
 };

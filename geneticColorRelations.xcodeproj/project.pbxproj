@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		904733251AD500B20002E2CE /* colorRelations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 904733231AD500B20002E2CE /* colorRelations.cpp */; };
 		90C7941B1978D09200276B2F /* DNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90C794171978D09200276B2F /* DNA.cpp */; };
 		90C7941C1978D09200276B2F /* Population.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90C794191978D09200276B2F /* Population.cpp */; };
 		90C7941F1978D1E100276B2F /* genImg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90C7941D1978D1E100276B2F /* genImg.cpp */; };
@@ -66,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		904733231AD500B20002E2CE /* colorRelations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = colorRelations.cpp; sourceTree = "<group>"; };
+		904733241AD500B20002E2CE /* colorRelations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colorRelations.h; sourceTree = "<group>"; };
 		90C794171978D09200276B2F /* DNA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNA.cpp; sourceTree = "<group>"; };
 		90C794181978D09200276B2F /* DNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNA.h; sourceTree = "<group>"; };
 		90C794191978D09200276B2F /* Population.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Population.cpp; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				904733231AD500B20002E2CE /* colorRelations.cpp */,
+				904733241AD500B20002E2CE /* colorRelations.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -345,6 +350,7 @@
 				90C794291978D48F00276B2F /* ofxXmlSettings.cpp in Sources */,
 				90C7941B1978D09200276B2F /* DNA.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				904733251AD500B20002E2CE /* colorRelations.cpp in Sources */,
 				90C7941F1978D1E100276B2F /* genImg.cpp in Sources */,
 				90C7942A1978D48F00276B2F /* tinyxml.cpp in Sources */,
 				90C7941C1978D09200276B2F /* Population.cpp in Sources */,
