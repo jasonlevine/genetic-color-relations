@@ -21,7 +21,6 @@ Population::Population(float m, int num, string imgPath) {
     ofSeedRandom();
     mutationRate = m;
     generations = 0;
-    numN = 0;
     
     //load image
     srcImg.loadImage(imgPath);
@@ -66,15 +65,14 @@ Population::Population(float m, int num, string imgPath) {
     
     
     CR.setup();
-    CR.numN = &numN;
     //find the relations of the course image
     CR.count = true;
     CR.findRelations(srcDNA, colorTables);
     CR.count = false;
-    perfectScore = numN-1;//pow(2, (float)numN);
+    perfectScore = CR.numN-1;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 2, imgColors.size()));
+        population.push_back(genImg(srcImg, 1, imgColors.size()));
     }
 
 }
@@ -87,13 +85,13 @@ void Population::draw() {
     float scale = 10;
     
     //srcImg.draw(100, 15);
-    drawImgScaled(srcImg, 50, 50, 5);
+    drawImgScaled(srcImg, 50, 50, 3);
     
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            drawImgScaled(population[i].img, 250, 50, 5);
+            drawImgScaled(population[i].img, 250, 50, 3);
             //population[i].img.draw(300 + 150 * 2, 15);
             break;
         }

@@ -30,8 +30,10 @@ public:
     
     float lastMaxFitness;
     
+    
     ofFbo saveFbo;
     int counter;
+    string folderName;
     
     bool bDraw;
     

@@ -27,5 +27,5 @@ public:
     
     bool count;
     
-    int * numN;
+    int numN;
 };

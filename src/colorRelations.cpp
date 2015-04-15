@@ -33,6 +33,8 @@ void colorRelations::setup(){
     nPos[5].set(-1, 1); // bottom left
     nPos[6].set(0, 1); // bottom
     nPos[7].set(1, 1); // bottom right
+    
+    numN = 0;
 }
 
 //--------------------------------------------------------------
@@ -173,7 +175,7 @@ void colorRelations::findNColor(int colID, int nCol, vector<colorTable> &colorT)
         colorT[colID].neighborColors.push_back(nCol);
         colorT[colID].neighborCount.push_back(1);
         
-        if (count) *(numN)++;
+        if (count) numN++;
     }
     
 }
