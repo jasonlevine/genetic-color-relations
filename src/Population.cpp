@@ -44,6 +44,13 @@ Population::Population(float m, int num, string imgPath) {
         }
     }
     
+    // add all colors to colrtable
+    for (int i = 0; i < imgColors.size(); i++) {
+        colorTable temp;
+        temp.mainColor = i;
+        colorTables.push_back(temp);
+    }
+    
     
 //  make a genImg that has the DNA to express the source image
     //todo: make this dna and then pass the dna to a genimg afterwards
@@ -194,11 +201,17 @@ void Population::calcFitness(){
         int i = start+blockIdx;
         
         vector<colorTable> genImgColors;
-        for (int c = 0; c < colorTables.size(); c++){
-            colorTable newNc;
-            newNc.mainColor = colorTables[c].mainColor;
-            genImgColors.push_back(newNc);
+        for (int i = 0; i < imgColors.size(); i++) {
+            colorTable temp;
+            temp.mainColor = i;
+            genImgColors.push_back(temp);
         }
+        
+//        for (int c = 0; c < colorTables.size(); c++){
+//            colorTable newNc;
+//            newNc.mainColor = colorTables[c].mainColor;
+//            genImgColors.push_back(newNc);
+//        }
         
         CR.findRelations(population[i], genImgColors);
         

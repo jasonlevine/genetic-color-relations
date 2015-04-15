@@ -69,16 +69,16 @@ void ofApp::draw(){
     saveFbo.end();
 
     
-    if (GA->getMaxFitness() > lastMaxFitness) {
-        ofImage saveImage;
-        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
-        saveFbo.readToPixels(saveImage.getPixelsRef());
-        saveImage.update();
-        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
-        
-        counter++;
-        lastMaxFitness = GA->getMaxFitness();
-    }
+//    if (GA->getMaxFitness() > lastMaxFitness) {
+//        ofImage saveImage;
+//        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
+//        saveFbo.readToPixels(saveImage.getPixelsRef());
+//        saveImage.update();
+//        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
+//        
+//        counter++;
+//        lastMaxFitness = GA->getMaxFitness();
+//    }
     
     ofSetColor(255);
     if (bDraw) saveFbo.draw(0,0);

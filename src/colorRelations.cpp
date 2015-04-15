@@ -47,28 +47,28 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
 //    float t1 = t;
     //top left corner
     ofVec2f tlc = ofVec2f(0, 0);
-    int topLeftID = findColor(img.getColor(tlc.x, tlc.y), colorT);
+    int topLeftID = img.getColor(tlc.x, tlc.y);//findColor(img.getColor(tlc.x, tlc.y), colorT);
     findNColor(topLeftID, img.getColor(tlc.x + right.x, tlc.y + right.y), colorT);
     findNColor(topLeftID, img.getColor(tlc.x + bottomRight.x, tlc.y + bottomRight.y), colorT);
     findNColor(topLeftID, img.getColor(tlc.x + bottom.x, tlc.y + bottom.y), colorT);
     
     //top right corner
     ofVec2f trc = ofVec2f(w-1, 0);
-    int topRightID = findColor(img.getColor(trc.x, trc.y), colorT);
+    int topRightID = img.getColor(trc.x, trc.y);//findColor(img.getColor(trc.x, trc.y), colorT);
     findNColor(topRightID, img.getColor(trc.x + left.x, trc.y + left.y), colorT);
     findNColor(topRightID, img.getColor(trc.x + bottomLeft.x, trc.y + bottomLeft.y), colorT);
     findNColor(topRightID, img.getColor(trc.x + bottom.x, trc.y + bottom.y), colorT);
     
     //bottom left corner
     ofVec2f blc = ofVec2f(0, h-1);
-    int bottomLeftID = findColor(img.getColor(blc.x, blc.y), colorT);
+    int bottomLeftID = img.getColor(blc.x, blc.y);//findColor(img.getColor(blc.x, blc.y), colorT);
     findNColor(bottomLeftID, img.getColor(blc.x + right.x, blc.y + right.y), colorT);
     findNColor(bottomLeftID, img.getColor(blc.x + topRight.x, blc.y + topRight.y), colorT);
     findNColor(bottomLeftID, img.getColor(blc.x + top.x, blc.y + top.y), colorT);
     
     //bottom right corner
     ofVec2f brc = ofVec2f(w-1, h-1);
-    int bottomRightID = findColor(img.getColor(brc.x, brc.y), colorT);
+    int bottomRightID = img.getColor(brc.x, brc.y);//findColor(img.getColor(brc.x, brc.y), colorT);
     findNColor(bottomRightID, img.getColor(brc.x + left.x, brc.y + left.y), colorT);
     findNColor(bottomRightID, img.getColor(brc.x + topLeft.x, brc.y + topLeft.y), colorT);
     findNColor(bottomRightID, img.getColor(brc.x + top.x, brc.y + top.y), colorT);
@@ -79,7 +79,7 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
 //    float t2 = t;
     //top edge
     for (int x = 1; x < w-1; x++){
-        int topID = findColor(img.getColor(x,0), colorT);
+        int topID = img.getColor(x,0);//findColor(img.getColor(x,0), colorT);
         
         for (int n = 3; n < nPos.size(); n++){
             findNColor(topID, img.getColor(x+nPos[n].x, nPos[n].y), colorT);
@@ -88,7 +88,7 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
     
     //left edge
     for (int y = 1; y < h-1; y++){
-        int leftID = findColor(img.getColor(0,y), colorT);
+        int leftID = img.getColor(0,y);//findColor(img.getColor(0,y), colorT);
         
         for (int n = 1; n < nPos.size(); n++){
             if (n != 3 && n != 5) findNColor(leftID, img.getColor(nPos[n].x, y+nPos[n].y), colorT);
@@ -97,7 +97,7 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
     
     //bottom edge
     for (int x = 1; x < w-1; x++){
-        int bottomID = findColor(img.getColor(x,h-1), colorT);
+        int bottomID = img.getColor(x,h-1);//findColor(img.getColor(x,h-1), colorT);
         
         for (int n = 0; n < nPos.size()-3; n++){
             findNColor(bottomID, img.getColor(x+nPos[n].x, h-1+nPos[n].y), colorT);
@@ -106,7 +106,7 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
     
     //left edge
     for (int y = 1; y < h-1; y++){
-        int leftID = findColor(img.getColor(w-1,y), colorT);
+        int leftID = img.getColor(w-1,y);//findColor(img.getColor(w-1,y), colorT);
         
         for (int n = 0; n < nPos.size(); n++){
             if (n != 2 && n != 4 && n != 7) findNColor(leftID, img.getColor(w-1+nPos[n].x, y+nPos[n].y), colorT);
@@ -118,7 +118,7 @@ void colorRelations::findRelations(genImg &img, vector<colorTable> &colorT){
     //everything else
     for (int y = 1; y < h-1; y++){
         for (int x = 1; x < w-1; x++){
-            int colID = findColor(img.getColor(x, y), colorT);
+            int colID = img.getColor(x, y);//findColor(img.getColor(x, y), colorT);
             
             // for every neighbor
             for (int n = 0; n < nPos.size(); n++){
