@@ -123,7 +123,7 @@ void Population::draw() {
 //    drawImgScaled(srcImg,25, 150, 40);
 //    drawBreakdown(colorRelations, 350, 150, 25);
     
-//    drawImgScaled(srcImg,10,100, 1);
+    drawImgScaled(srcImg,10,100, 3);
 //    drawImgScaled(evoImg,0, 15, 20);
     
     srcImg.draw(100, 15);
@@ -133,7 +133,7 @@ void Population::draw() {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
             population[i].img.draw(300 + 150 * 2, 15);
-//            drawImgScaled(population[i].img,400, 100, 1);
+            drawImgScaled(population[i].img,250, 100, 3);
 //            for (int x = 0; x < 5; x++) {
 //                for (int y = 0; y < 5; y++) {
 //                    float x1, y1, w, h;

@@ -107,6 +107,10 @@ Desktop.ini
 #########################
 
 .mailmap
-.png
-.jpg
-.gif
+
+
+
+### media
+*.png
+*.jpg
+*.gif
