@@ -107,6 +107,13 @@ Desktop.ini
 #########################
 
 .mailmap
+<<<<<<< HEAD
+=======
+
+
+
+### media
+>>>>>>> a4d411d4a4c274f0ee90e07321646859bff4829f
 *.png
 *.jpg
 *.gif

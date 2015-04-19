@@ -90,7 +90,7 @@ void Population::draw() {
 
     float spacing = 30;
     float scale = 10;
-    
+
     //srcImg.draw(100, 50);
     drawImgScaled(srcImg, 50, 50, 12);
     
@@ -100,6 +100,7 @@ void Population::draw() {
             population[i].expressGenes(imgColors);
             drawImgScaled(population[i].img, 250, 50, 3);
             //population[i].img.draw(150, 50);
+
             break;
         }
     }

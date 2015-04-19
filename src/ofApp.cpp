@@ -7,6 +7,7 @@ void ofApp::setup(){
     int popmax = 80;
     float mutationRate = 0.005;
     GA = new Population(mutationRate,popmax,"gradient8.png");
+
     
     GA->calcFitness();
     GA->selection();
@@ -80,13 +81,16 @@ void ofApp::draw(){
         saveFbo.readToPixels(saveImage.getPixelsRef());
         saveImage.update();
         saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
+
         
         counter++;
         lastMaxFitness = GA->getMaxFitness();
     }
     
     ofSetColor(255);
+
     if (bDraw) saveFbo.draw(0,0);
+
 }
 
 //--------------------------------------------------------------
