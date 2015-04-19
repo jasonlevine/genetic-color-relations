@@ -4,9 +4,9 @@
 void ofApp::setup(){
     ofSetVerticalSync(false);
     
-    int popmax = 10;
-    float mutationRate = 0.0001;
-    GA = new Population(mutationRate,popmax,"gradient.jpg");
+    int popmax = 80;
+    float mutationRate = 0.005;
+    GA = new Population(mutationRate,popmax,"gradient8.png");
     
     GA->calcFitness();
     GA->selection();
@@ -17,7 +17,7 @@ void ofApp::setup(){
     counter = 0;
     folderName = "seq" + ofGetTimestampString();
     
-    lastMaxFitness = GA->getMaxFitness();
+    lastFitness = lastMaxFitness = GA->getMaxFitness();
     
     bDraw = true;
     
@@ -46,6 +46,10 @@ void ofApp::update(){
         minutes = (elapsedTime / 60) % 60;
         hours = (elapsedTime / 3600);
         
+        
+        if (GA->getMaxFitness() < lastFitness) GA->decayMutationRate();
+        lastFitness = GA->getMaxFitness();
+        
 
 //        cout  << GA->getMaxFitness() << " " << GA->getAvgFitness() << " -------- " << GA->getGenerations() << endl;
     }
@@ -59,26 +63,27 @@ void ofApp::update(){
 void ofApp::draw(){
     saveFbo.begin();
     ofClear(0);
-    ofBackground(120, 20 , 100);
+    ofBackground(120);
     
     GA->draw();
     
     ofSetColor(255);
-    ofDrawBitmapString( ofToString(GA->getMaxFitness(),1) + "/" + ofToString(GA->perfectScore) + " --- gen " + ofToString(GA->getGenerations()) + " --- " + ofToString(hours) + " hours " + ofToString(minutes) + " minutes " + ofToString(seconds) + " seconds", 10, 10);
+    ofDrawBitmapString(ofToString(GA->getMaxFitness(),1) + "/" + ofToString(GA->perfectScore) + " --- gen " + ofToString(GA->getGenerations()) + " --- " + ofToString(hours) + " hours " + ofToString(minutes) + " minutes " + ofToString(seconds) + " seconds\n"
+                       + "mRate: " + ofToString(GA->getMutationRate()), 10, 10);
     
     saveFbo.end();
 
     
-//    if (GA->getMaxFitness() > lastMaxFitness) {
-//        ofImage saveImage;
-//        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
-//        saveFbo.readToPixels(saveImage.getPixelsRef());
-//        saveImage.update();
-//        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
-//        
-//        counter++;
-//        lastMaxFitness = GA->getMaxFitness();
-//    }
+    if (GA->getMaxFitness() > lastMaxFitness) {
+        ofImage saveImage;
+        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
+        saveFbo.readToPixels(saveImage.getPixelsRef());
+        saveImage.update();
+        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
+        
+        counter++;
+        lastMaxFitness = GA->getMaxFitness();
+    }
     
     ofSetColor(255);
     if (bDraw) saveFbo.draw(0,0);

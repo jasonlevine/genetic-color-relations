@@ -25,25 +25,59 @@ void DNA::testFitness() {
     float score = 0;
 }
 
-DNA DNA::crossover(DNA partner){
-    DNA child(num, nColors);
+//DNA DNA::crossover(DNA partner){
+//    
+//    
+//    dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+//    int start = 0;
+//    int end = num;
+//    DNA *child = new DNA(num, nColors);
+//    int midpoint = ofRandom(num);
+//    dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
+//        int i = start+blockIdx;
+//        //    for (int i = 0; i < num; i++) {
+//        if (i > midpoint) child->genes[i] = genes[i];
+//        else child->genes[i] = partner.genes[i];
+//    });
+//    
+//    return *child;
+//}
+
+DNA DNA::crossover(DNA partner, float mutationRate){ //crossover + mutate
+
+    
+    dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    int start = 0;
+    int end = num;
+    DNA *child = new DNA(num, nColors);
     int midpoint = ofRandom(num);
+    dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
+        int i = start+blockIdx;
+//    for (int i = 0; i < num; i++) {
+        if (ofRandomuf() < mutationRate) {
+            genes[i] = ofRandom(nColors);
+        }
+        else {
+            if (i > midpoint) child->genes[i] = genes[i];
+            else child->genes[i] = partner.genes[i];
+        }
+    });
     
-    for (int i = 0; i < num; i++) {
-        if (i > midpoint) child.genes[i] = genes[i];
-        else child.genes[i] = partner.genes[i];
-    }
+    DNA returnChild = *child;
+    delete child;
+    return returnChild;
     
-    return child;
 }
 
 void DNA::mutate(float mutationRate){
-    for (int i = 0; i < num; i++) {
+    dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    int start = 0;
+    int end = num;
+    dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
+        int i = start+blockIdx;
+//    for (int i = 0; i < num; i++) {
         if (ofRandomuf() < mutationRate) {
             genes[i] = ofRandom(nColors);
-            if (genes[i] >= nColors || genes[i] < 0) {
-                cout << "gotcha!!!" << endl;
-            }
         }
-    }
+    });
 }

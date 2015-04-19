@@ -76,10 +76,10 @@ Population::Population(float m, int num, string imgPath) {
     CR.count = true;
     CR.findRelations(srcDNA, colorTables);
     CR.count = false;
-    perfectScore = CR.numN-1;//pow(2, (float)numN);
+    perfectScore = CR.numN;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 1, imgColors.size()));
+        population.push_back(genImg(srcImg, 4, imgColors.size()));
     }
 
 }
@@ -91,15 +91,15 @@ void Population::draw() {
     float spacing = 30;
     float scale = 10;
     
-    //srcImg.draw(100, 15);
-    drawImgScaled(srcImg, 50, 50, 3);
+    //srcImg.draw(100, 50);
+    drawImgScaled(srcImg, 50, 50, 12);
     
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
             drawImgScaled(population[i].img, 250, 50, 3);
-            //population[i].img.draw(300 + 150 * 2, 15);
+            //population[i].img.draw(150, 50);
             break;
         }
     }
@@ -181,13 +181,14 @@ void Population::reproduction() {
         DNA momgenes = mom.getDNA();
         DNA dadgenes = dad.getDNA();
                 // Mate their genes
-        DNA child = momgenes.crossover(dadgenes);
+        DNA child = momgenes.crossover(dadgenes, mutationRate);
         // Mutate their genes
-        child.mutate(mutationRate);
+//        child.mutate(mutationRate);
         // Fill the new population with the new child
         population[i].dna = child;
         //population[i].expressGenes(imgColors);
     }
+                   
     generations++;
 }
 
@@ -202,7 +203,7 @@ void Population::calcFitness(){
         vector<colorTable> genImgColors;
         for (int i = 0; i < imgColors.size(); i++) {
             colorTable temp;
-            temp.mainColor = i;
+            //temp.mainColor = i;
             genImgColors.push_back(temp);
         }
         

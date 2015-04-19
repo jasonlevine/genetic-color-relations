@@ -35,7 +35,12 @@ public:
     float getMaxFitness();
     float getMinFitness();
     float getAvgFitness();
+    float getMutationRate() { return mutationRate; }
     
+    
+    void decayMutationRate() { mutationRate *= 0.999; }
+    
+    //save
     void saveSession();
     void loadSession();
     

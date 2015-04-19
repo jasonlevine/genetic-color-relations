@@ -14,7 +14,8 @@ public:
     DNA(int _num, int _nColors);
     void expressGenes();
     void testFitness();
-    DNA crossover(DNA partner);
+    DNA crossover(DNA partner, float mutationRate);
+//    DNA crossover(DNA partner);
     void mutate(float mutationRate);
     
     
