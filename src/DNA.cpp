@@ -75,7 +75,7 @@ void DNA::mutate(float mutationRate){
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
 //    for (int i = 0; i < num; i++) {
-        if (ofRandomuf() < mutationRate) {
+        if (ofRandomuf() < mutationRate * (1.0 - geneFitness[i]) + mutationRate) {
             genes[i] = ofRandom(nColors);
         }
     });

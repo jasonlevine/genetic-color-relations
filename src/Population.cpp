@@ -102,7 +102,7 @@ void Population::draw() {
             drawImgScaled(population[i].img, 150, 50, 3);
             //population[i].img.draw(150, 50);
             population[i].generateHeatMap();
-            drawImgScaled(population[i].heatmap, 253, 53, 3);
+            drawImgScaled(population[i].heatmap, 250, 50, 3);
             break;
         }
     }

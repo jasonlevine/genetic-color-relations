@@ -14,7 +14,7 @@
 genImg::genImg(ofImage &src, int scale, int nColors) {
     dna = DNA(src.getWidth()*scale * src.getHeight()*scale, nColors);
     img.allocate(src.getWidth()*scale, src.getHeight()*scale, OF_IMAGE_COLOR);
-    heatmap.allocate(src.getWidth()*scale-2, src.getHeight()*scale-2, OF_IMAGE_COLOR);
+    heatmap.allocate(src.getWidth()*scale, src.getHeight()*scale, OF_IMAGE_COLOR);
     fitness = 1;
     
     

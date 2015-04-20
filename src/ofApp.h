@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "Population.h"
 
-
-
 class ofApp : public ofBaseApp{
 
 public:

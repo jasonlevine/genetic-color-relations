@@ -62,7 +62,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    saveFbo.begin();
+//    saveFbo.begin();
     ofClear(0);
     ofBackground(120);
     
@@ -72,24 +72,24 @@ void ofApp::draw(){
     ofDrawBitmapString(ofToString(GA->getMaxFitness(),1) + "/" + ofToString(GA->perfectScore) + " --- gen " + ofToString(GA->getGenerations()) + " --- " + ofToString(hours) + " hours " + ofToString(minutes) + " minutes " + ofToString(seconds) + " seconds\n"
                        + "mRate: " + ofToString(GA->getMutationRate()), 10, 10);
     
-    saveFbo.end();
-
-    
-    if (GA->getMaxFitness() > lastMaxFitness) {
-        ofImage saveImage;
-        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
-        saveFbo.readToPixels(saveImage.getPixelsRef());
-        saveImage.update();
-        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
-
-        
-        counter++;
-        lastMaxFitness = GA->getMaxFitness();
-    }
-    
-    ofSetColor(255);
-
-    if (bDraw) saveFbo.draw(0,0);
+//    saveFbo.end();
+//
+//    
+//    if (GA->getMaxFitness() > lastMaxFitness) {
+//        ofImage saveImage;
+//        saveImage.allocate(640, 480, OF_IMAGE_COLOR);
+//        saveFbo.readToPixels(saveImage.getPixelsRef());
+//        saveImage.update();
+//        saveImage.saveImage(folderName + "/evo" + ofToString(counter) + ".png");
+//
+//        
+//        counter++;
+//        lastMaxFitness = GA->getMaxFitness();
+//    }
+//    
+//    ofSetColor(255);
+//
+//    if (bDraw) saveFbo.draw(0,0);
 
 }
 
