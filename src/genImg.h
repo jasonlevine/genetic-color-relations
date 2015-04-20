@@ -13,6 +13,7 @@ class genImg {
 public:
     genImg(ofImage &src, int scale, int nColors);
     void expressGenes(vector<ofColor> &colors);
+    void generateHeatMap();
     void draw(int x, int y){ img.draw(x,y); }
     float getFitness();
     void setFitness(float fit) { fitness = fit; }
@@ -20,10 +21,10 @@ public:
     DNA getDNA();
     
     DNA dna;
-    ofImage img;
+    ofImage img, heatmap;
     
 //private:
-    
+    vector<float> geneFitness;
     float fitness;
 
 };

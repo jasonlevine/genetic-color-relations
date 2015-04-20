@@ -179,3 +179,34 @@ void colorRelations::findNColor(int colID, int nCol, vector<colorTable> &colorT)
     }
     
 }
+
+float colorRelations::calcFitness(genImg &img, vector<colorTable> &colorT){
+    int w = img.img.getWidth();
+    int h = img.img.getHeight();
+    
+    float fitness = 0.0;
+    img.geneFitness.assign((w-2)*(h-2), 0.0);
+    
+    for (int y = 1; y < h-1; y++){
+        for (int x = 1; x < w-1; x++){
+            int colID = img.getColor(x, y);//findColor(img.getColor(x, y), colorT);
+            
+            // for every neighbor
+            for (int n = 0; n < nPos.size(); n++){
+                int nCol = img.getColor(x+nPos[n].x, y+nPos[n].y);
+                //inc fitness by 1/8 per correct neighbour
+                for (int nc = 0; nc < colorT[colID].neighborColors.size(); nc++){
+                    if (colorT[colID].neighborColors[nc] == nCol){
+//                        img.geneFitness[(y-1) * (w-2) + (x-1)] += 0.125;
+                        fitness += 0.125;
+                        break;
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
+    return fitness;
+}

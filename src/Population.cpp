@@ -73,15 +73,16 @@ Population::Population(float m, int num, string imgPath) {
     
     CR.setup();
     //find the relations of the course image
-    CR.count = true;
+//    CR.count = true;
     CR.findRelations(srcDNA, colorTables);
-    CR.count = false;
-    perfectScore = CR.numN;//pow(2, (float)numN);
+//    CR.count = false;
+     //CR.numN;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
         population.push_back(genImg(srcImg, 4, imgColors.size()));
     }
 
+    perfectScore = (population[0].img.width - 2) * (population[0].img.height - 2);
 }
 
 #pragma mark draw-routines
@@ -98,9 +99,10 @@ void Population::draw() {
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            drawImgScaled(population[i].img, 250, 50, 3);
+            drawImgScaled(population[i].img, 150, 50, 3);
             //population[i].img.draw(150, 50);
-
+//            population[i].generateHeatMap();
+//            drawImgScaled(population[i].heatmap, 253, 53, 3);
             break;
         }
     }
@@ -200,6 +202,9 @@ void Population::calcFitness(){
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
         
+        population[i].fitness = CR.calcFitness(population[i], colorTables);
+        
+        /*
         //make an empty colortable
         vector<colorTable> genImgColors;
         for (int i = 0; i < imgColors.size(); i++) {
@@ -235,8 +240,9 @@ void Population::calcFitness(){
             }
         }
         
-        population[i].fitness = correct;
+        population[i].fitness = correct;*/
     });
+        
 }
 
 

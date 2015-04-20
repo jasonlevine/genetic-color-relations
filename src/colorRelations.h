@@ -22,6 +22,7 @@ public:
     void findRelations(genImg &img, vector<colorTable> &colorT);
     int findColor(int col, vector<colorTable> &colorT);
     void findNColor(int colID, int nCol, vector<colorTable> &colorT);
+    float calcFitness(genImg &img, vector<colorTable> &colorT);
     
     vector<ofVec2f> nPos;
     

@@ -14,7 +14,9 @@
 genImg::genImg(ofImage &src, int scale, int nColors) {
     dna = DNA(src.getWidth()*scale * src.getHeight()*scale, nColors);
     img.allocate(src.getWidth()*scale, src.getHeight()*scale, OF_IMAGE_COLOR);
+    heatmap.allocate(src.getWidth()*scale-2, src.getHeight()*scale-2, OF_IMAGE_COLOR);
     fitness = 1;
+    
     
 }
 
@@ -29,6 +31,18 @@ void genImg::expressGenes(vector<ofColor> &colors) {
     }
     img.update();
         
+}
+
+void genImg::generateHeatMap(){
+    for (int i = 0; i < geneFitness.size(); i++){
+        int x = i % (int)heatmap.getWidth();
+        int y = i / (int)heatmap.getHeight();
+        
+        ofColor col;
+        col.setHsb( geneFitness[i]*192, 255, 255);
+        heatmap.setColor(x, y, col);
+    }
+    
 }
 
 
