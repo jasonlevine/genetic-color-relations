@@ -45,7 +45,6 @@ void DNA::testFitness() {
 
 DNA DNA::crossover(DNA partner, float mutationRate){ //crossover + mutate
 
-    
     dispatch_queue_t gcdq = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     int start = 0;
     int end = num;
@@ -53,8 +52,8 @@ DNA DNA::crossover(DNA partner, float mutationRate){ //crossover + mutate
     int midpoint = ofRandom(num);
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
-//    for (int i = 0; i < num; i++) {
-        if (ofRandomuf() < mutationRate) {
+
+        if (ofRandomuf() < mutationRate) { //the worse the fitness the higher the mutation rate
             genes[i] = ofRandom(nColors);
         }
         else {

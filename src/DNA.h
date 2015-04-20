@@ -23,7 +23,7 @@ public:
     int num;
     int nColors;
     float fitness;
-    
+    vector<float> geneFitness;
 };
 
 

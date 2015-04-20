@@ -4,7 +4,7 @@
 void ofApp::setup(){
     ofSetVerticalSync(false);
     
-    int popmax = 80;
+    int popmax = 20;
     float mutationRate = 0.005;
     GA = new Population(mutationRate,popmax,"gradient8.png");
 

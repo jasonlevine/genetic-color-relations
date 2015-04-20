@@ -180,12 +180,13 @@ void colorRelations::findNColor(int colID, int nCol, vector<colorTable> &colorT)
     
 }
 
+//--------------------------------------------------------------
 float colorRelations::calcFitness(genImg &img, vector<colorTable> &colorT){
     int w = img.img.getWidth();
     int h = img.img.getHeight();
     
     float fitness = 0.0;
-    img.geneFitness.assign((w-2)*(h-2), 0.0);
+    img.dna.geneFitness.assign((w-2)*(h-2), 0.0);
     
     for (int y = 1; y < h-1; y++){
         for (int x = 1; x < w-1; x++){
@@ -197,7 +198,7 @@ float colorRelations::calcFitness(genImg &img, vector<colorTable> &colorT){
                 //inc fitness by 1/8 per correct neighbour
                 for (int nc = 0; nc < colorT[colID].neighborColors.size(); nc++){
                     if (colorT[colID].neighborColors[nc] == nCol){
-//                        img.geneFitness[(y-1) * (w-2) + (x-1)] += 0.125;
+                        img.dna.geneFitness[(y-1) * (w-2) + (x-1)] += 0.125;
                         fitness += 0.125;
                         break;
                     }

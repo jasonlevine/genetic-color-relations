@@ -21,6 +21,7 @@ genImg::genImg(ofImage &src, int scale, int nColors) {
 }
 
 void genImg::expressGenes(vector<ofColor> &colors) {
+   
     for (int g = 0; g < dna.genes.size(); g++){
         int x = g % (int)img.getWidth();
         int y = g / (int)img.getWidth();
@@ -34,15 +35,14 @@ void genImg::expressGenes(vector<ofColor> &colors) {
 }
 
 void genImg::generateHeatMap(){
-    for (int i = 0; i < geneFitness.size(); i++){
+    for (int i = 0; i < dna.geneFitness.size(); i++){
         int x = i % (int)heatmap.getWidth();
         int y = i / (int)heatmap.getHeight();
         
         ofColor col;
-        col.setHsb( geneFitness[i]*192, 255, 255);
+        col.setHsb( 255, 0, dna.geneFitness[i]*255);
         heatmap.setColor(x, y, col);
     }
-    
 }
 
 

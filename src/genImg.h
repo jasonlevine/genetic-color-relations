@@ -24,7 +24,7 @@ public:
     ofImage img, heatmap;
     
 //private:
-    vector<float> geneFitness;
+    
     float fitness;
 
 };
