@@ -43,6 +43,8 @@ void genImg::generateHeatMap(){
         col.setHsb( 255, 0, dna.geneFitness[i]*255);
         heatmap.setColor(x, y, col);
     }
+    
+    heatmap.update();
 }
 
 

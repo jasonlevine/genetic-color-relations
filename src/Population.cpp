@@ -79,10 +79,10 @@ Population::Population(float m, int num, string imgPath) {
      //CR.numN;//pow(2, (float)numN);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 4, imgColors.size()));
+        population.push_back(genImg(srcImg, 2, imgColors.size()));
     }
 
-    perfectScore = (population[0].img.width - 2) * (population[0].img.height - 2);
+    perfectScore = population[0].img.width * population[0].img.height;
 }
 
 #pragma mark draw-routines
@@ -92,17 +92,18 @@ void Population::draw() {
     float spacing = 30;
     float scale = 10;
 
-    //srcImg.draw(100, 50);
-    drawImgScaled(srcImg, 50, 50, 12);
+    srcImg.draw(20, 50);
+    //drawImgScaled(srcImg, 20, 50, 4);
     
     //draw fittest image
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            drawImgScaled(population[i].img, 150, 50, 3);
-            //population[i].img.draw(150, 50);
+            drawImgScaled(population[i].img, 50, 100, 4);
+            //population[i].img.draw(20 + 32 * 5 + 20, 50);
             population[i].generateHeatMap();
-            drawImgScaled(population[i].heatmap, 250, 50, 3);
+            drawImgScaled(population[i].heatmap, 50 + 32 * 5 + 130, 100, 4);
+            //population[i].heatmap.draw(20 + (32 * 5 + 20)*2, 50);
             break;
         }
     }

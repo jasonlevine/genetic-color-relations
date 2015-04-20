@@ -189,33 +189,48 @@ float colorRelations::calcFitness(genImg &img, vector<colorTable> &colorT){
     img.dna.geneFitness.assign(w*h, 0.0);
     
     
-//    //top left corner
-//    ofVec2f tlc = ofVec2f(0, 0);
-//    int topLeftID = img.getColor(tlc.x, tlc.y);//findColor(img.getColor(tlc.x, tlc.y), colorT);
-//    calcNFitness(img, tlc.x + tlc.y * w, topLeftID, nCol, fitness, 0.125, colorT);
-//    findNColor(topLeftID, img.getColor(tlc.x + bottomRight.x, tlc.y + bottomRight.y), colorT);
-//    findNColor(topLeftID, img.getColor(tlc.x + bottom.x, tlc.y + bottom.y), colorT);
-//    
-//    //top right corner
-//    ofVec2f trc = ofVec2f(w-1, 0);
-//    int topRightID = img.getColor(trc.x, trc.y);//findColor(img.getColor(trc.x, trc.y), colorT);
-//    findNColor(topRightID, img.getColor(trc.x + left.x, trc.y + left.y), colorT);
-//    findNColor(topRightID, img.getColor(trc.x + bottomLeft.x, trc.y + bottomLeft.y), colorT);
-//    findNColor(topRightID, img.getColor(trc.x + bottom.x, trc.y + bottom.y), colorT);
-//    
-//    //bottom left corner
-//    ofVec2f blc = ofVec2f(0, h-1);
-//    int bottomLeftID = img.getColor(blc.x, blc.y);//findColor(img.getColor(blc.x, blc.y), colorT);
-//    findNColor(bottomLeftID, img.getColor(blc.x + right.x, blc.y + right.y), colorT);
-//    findNColor(bottomLeftID, img.getColor(blc.x + topRight.x, blc.y + topRight.y), colorT);
-//    findNColor(bottomLeftID, img.getColor(blc.x + top.x, blc.y + top.y), colorT);
-//    
-//    //bottom right corner
-//    ofVec2f brc = ofVec2f(w-1, h-1);
-//    int bottomRightID = img.getColor(brc.x, brc.y);//findColor(img.getColor(brc.x, brc.y), colorT);
-//    findNColor(bottomRightID, img.getColor(brc.x + left.x, brc.y + left.y), colorT);
-//    findNColor(bottomRightID, img.getColor(brc.x + topLeft.x, brc.y + topLeft.y), colorT);
-//    findNColor(bottomRightID, img.getColor(brc.x + top.x, brc.y + top.y), colorT);
+    //top left corner
+    ofVec2f tlc = ofVec2f(0, 0);
+    int topLeftID = img.getColor(tlc.x, tlc.y);//findColor(img.getColor(tlc.x, tlc.y), colorT);
+    int nCol = img.getColor(tlc.x + right.x, tlc.y + right.y);
+    calcNFitness(img, tlc.x + tlc.y * w, topLeftID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(tlc.x + bottomRight.x, tlc.y + bottomRight.y);
+    calcNFitness(img, tlc.x + tlc.y * w, topLeftID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(tlc.x + bottom.x, tlc.y + bottom.y);
+    calcNFitness(img, tlc.x + tlc.y * w, topLeftID, nCol, fitness, 0.33333, colorT);
+    
+    //top right corner
+    ofVec2f trc = ofVec2f(w-1, 0);
+    int topRightID = img.getColor(trc.x, trc.y);//findColor(img.getColor(trc.x, trc.y), colorT);
+    
+    nCol = img.getColor(trc.x + left.x, trc.y + left.y);
+    calcNFitness(img, trc.x + trc.y * w, topRightID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(trc.x + bottomLeft.x, trc.y + bottomLeft.y);
+    calcNFitness(img, trc.x + trc.y * w, topRightID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(trc.x + bottom.x, trc.y + bottom.y);
+    calcNFitness(img, trc.x + trc.y * w, topRightID, nCol, fitness, 0.33333, colorT);
+
+    
+    //bottom left corner
+    ofVec2f blc = ofVec2f(0, h-1);
+    int bottomLeftID = img.getColor(blc.x, blc.y);//findColor(img.getColor(blc.x, blc.y), colorT);
+    nCol = img.getColor(blc.x + right.x, blc.y + right.y);
+    calcNFitness(img, blc.x + blc.y * w, bottomLeftID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(blc.x + topRight.x, blc.y + topRight.y);
+    calcNFitness(img, blc.x + blc.y * w, bottomLeftID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(blc.x + top.x, blc.y + top.y);
+    calcNFitness(img, blc.x + blc.y * w, bottomLeftID, nCol, fitness, 0.33333, colorT);
+    
+    
+    //bottom right corner
+    ofVec2f brc = ofVec2f(w-1, h-1);
+    int bottomRightID = img.getColor(brc.x, brc.y);//findColor(img.getColor(brc.x, brc.y), colorT);
+    nCol = img.getColor(brc.x + left.x, brc.y + left.y);
+    calcNFitness(img, brc.x + brc.y * w, bottomRightID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(brc.x + topLeft.x, brc.y + topLeft.y);
+    calcNFitness(img, brc.x + brc.y * w, bottomRightID, nCol, fitness, 0.33333, colorT);
+    nCol = img.getColor(brc.x + top.x, brc.y + top.y);
+    calcNFitness(img, brc.x + brc.y * w, bottomRightID, nCol, fitness, 0.33333, colorT);
     //    cout << div << endl;
     //    cout << "corners - " << t - t1 << endl;
     
@@ -223,37 +238,51 @@ float colorRelations::calcFitness(genImg &img, vector<colorTable> &colorT){
     //    float t2 = t;
     //top edge
     for (int x = 1; x < w-1; x++){
-        int topID = img.getColor(x,0);//findColor(img.getColor(x,0), colorT);
+        int y = 0;
+        int colID = img.getColor(x,y);//findColor(img.getColor(x,0), colorT);
+        
         
         for (int n = 3; n < nPos.size(); n++){
-            findNColor(topID, img.getColor(x+nPos[n].x, nPos[n].y), colorT);
+            int nCol = img.getColor(x+nPos[n].x, y+nPos[n].y);
+            calcNFitness(img, x + y * w, colID, nCol, fitness, 0.2, colorT);
         }
     }
     
     //left edge
     for (int y = 1; y < h-1; y++){
-        int leftID = img.getColor(0,y);//findColor(img.getColor(0,y), colorT);
+        int x = 0;
+        int colID = img.getColor(x,y);//findColor(img.getColor(0,y), colorT);
+        
         
         for (int n = 1; n < nPos.size(); n++){
-            if (n != 3 && n != 5) findNColor(leftID, img.getColor(nPos[n].x, y+nPos[n].y), colorT);
+            if (n != 3 && n != 5) {
+                int nCol = img.getColor(nPos[n].x, y+nPos[n].y);
+                calcNFitness(img, x + y * w, colID, nCol, fitness, 0.2, colorT);
+            }
         }
     }
     
     //bottom edge
     for (int x = 1; x < w-1; x++){
-        int bottomID = img.getColor(x,h-1);//findColor(img.getColor(x,h-1), colorT);
+        int y = h-1;
+        int colID = img.getColor(x,y);//findColor(img.getColor(x,h-1), colorT);
         
         for (int n = 0; n < nPos.size()-3; n++){
-            findNColor(bottomID, img.getColor(x+nPos[n].x, h-1+nPos[n].y), colorT);
+            int nCol = img.getColor(nPos[n].x, y+nPos[n].y);
+            calcNFitness(img, x + y * w, colID, nCol, fitness, 0.2, colorT);
         }
     }
     
-    //left edge
+    //right edge
     for (int y = 1; y < h-1; y++){
-        int leftID = img.getColor(w-1,y);//findColor(img.getColor(w-1,y), colorT);
+        int x = w-1;
+        int colID = img.getColor(x,y);//findColor(img.getColor(w-1,y), colorT);
         
         for (int n = 0; n < nPos.size(); n++){
-            if (n != 2 && n != 4 && n != 7) findNColor(leftID, img.getColor(w-1+nPos[n].x, y+nPos[n].y), colorT);
+            if (n != 2 && n != 4 && n != 7) {
+                int nCol = img.getColor(nPos[n].x, y+nPos[n].y);
+                calcNFitness(img, x + y * w, colID, nCol, fitness, 0.2, colorT);
+            }
         }
     }
     
@@ -276,7 +305,7 @@ void colorRelations::calcNFitness(genImg &img, int i, int colID, int nCol, float
     //inc fitness by 1/8 per correct neighbour
     for (int nc = 0; nc < colorT[colID].neighborColors.size(); nc++){
         if (colorT[colID].neighborColors[nc] == nCol){
-            img.dna.geneFitness[i] += 0.125;
+            img.dna.geneFitness[i] += inc;
             fitness += inc;
             break;
         }
