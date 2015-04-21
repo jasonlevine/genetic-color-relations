@@ -6,7 +6,7 @@ void ofApp::setup(){
     
     int popmax = 20;
     float mutationRate = 0.005;
-    GA = new Population(mutationRate,popmax,"gradient32.png");
+    GA = new Population(mutationRate,popmax,"image2.jpg");
 
     
     GA->calcFitness();
@@ -21,6 +21,8 @@ void ofApp::setup(){
     lastFitness = lastMaxFitness = GA->getMaxFitness();
     
     bDraw = true;
+    
+    numTimesFitnessUnchanged =  0;
     
 }
 
@@ -48,7 +50,17 @@ void ofApp::update(){
         hours = (elapsedTime / 3600);
         
         
-        if (GA->getMaxFitness() < lastFitness) GA->decayMutationRate();
+        if (GA->getMaxFitness() - lastFitness < - 0.1) GA->mutationRate *= 0.999;
+        
+        
+        if (GA->getMaxFitness() == lastFitness) numTimesFitnessUnchanged++;
+        else numTimesFitnessUnchanged = 0;
+        
+        if (numTimesFitnessUnchanged > 10) {
+            GA->mutationRate *= 1.001;
+            numTimesFitnessUnchanged = 0;
+        }
+        
         lastFitness = GA->getMaxFitness();
         
 

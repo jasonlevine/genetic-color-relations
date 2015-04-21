@@ -44,12 +44,7 @@ Population::Population(float m, int num, string imgPath) {
         }
     }
     
-    // add all colors to colrtable
-    for (int i = 0; i < imgColors.size(); i++) {
-        colorTable temp;
-        temp.mainColor = i;
-        colorTables.push_back(temp);
-    }
+
     
     
 //  make a genImg that has the DNA to express the source image
@@ -70,16 +65,18 @@ Population::Population(float m, int num, string imgPath) {
         }
     }
     
+    // add all colors to colrtable
+    for (int i = 0; i < imgColors.size(); i++) {
+        colorTable temp;
+        temp.mainColor = i;
+        CR.colorT.push_back(temp);
+    }
     
     CR.setup();
-    //find the relations of the course image
-//    CR.count = true;
-    CR.findRelations(srcDNA, colorTables);
-//    CR.count = false;
-     //CR.numN;//pow(2, (float)numN);
+    CR.findRelations(srcDNA);
     
     for (int i = 0; i < num; i++) {
-        population.push_back(genImg(srcImg, 2, imgColors.size()));
+        population.push_back(genImg(srcImg, 1, imgColors.size()));
     }
 
     perfectScore = population[0].img.width * population[0].img.height;
@@ -99,11 +96,13 @@ void Population::draw() {
     for (int i = 0; i < population.size(); i++) {
         if (population[i].fitness == getMaxFitness()){
             population[i].expressGenes(imgColors);
-            drawImgScaled(population[i].img, 50, 100, 4);
-            //population[i].img.draw(20 + 32 * 5 + 20, 50);
+            drawImgScaled(population[i].img, 50, 100, 8);
             population[i].generateHeatMap();
-            drawImgScaled(population[i].heatmap, 50 + 32 * 5 + 130, 100, 4);
-            //population[i].heatmap.draw(20 + (32 * 5 + 20)*2, 50);
+            drawImgScaled(population[i].heatmap, 50 + 32 * 5 + 130, 100, 8);
+            
+            ofSetColor(255);
+            population[i].img.draw(20 + 32 + 10, 50);
+            population[i].heatmap.draw(20 + (32+ 10)*2, 50);
             break;
         }
     }
@@ -203,7 +202,7 @@ void Population::calcFitness(){
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
         
-        population[i].fitness = CR.calcFitness(population[i], colorTables);
+        population[i].fitness = CR.calcFitness(population[i]);
         
         /*
         //make an empty colortable

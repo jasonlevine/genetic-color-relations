@@ -48,7 +48,7 @@ public:
     int numN;
     float perfectScore;
     
-private:
+//private:
     ofxXmlSettings session;
     
     float mutationRate;          // Mutation rate
@@ -58,7 +58,7 @@ private:
     
     ofImage srcImg, heatmap;
     
-    vector<colorTable> colorTables;
+//    vector<colorTable> colorTables;
     vector<ofColor> imgColors;
     
     colorRelations CR;

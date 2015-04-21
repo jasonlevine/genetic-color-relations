@@ -53,7 +53,6 @@ DNA genImg::getDNA() {
 }
 
 
-
 float genImg::getFitness() {
     return fitness;
 }

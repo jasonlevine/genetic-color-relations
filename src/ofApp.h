@@ -27,6 +27,7 @@ public:
     int elapsedTime;
     
     float lastMaxFitness, lastFitness;
+    int numTimesFitnessUnchanged;
     
     
     ofFbo saveFbo;

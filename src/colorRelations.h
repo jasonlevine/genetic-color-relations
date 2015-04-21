@@ -19,15 +19,16 @@ struct colorTable {
 class colorRelations {
 public:
     void setup();
-    void findRelations(genImg &img, vector<colorTable> &colorT);
-    int findColor(int col, vector<colorTable> &colorT);
-    void findNColor(int colID, int nCol, vector<colorTable> &colorT);
-    float calcFitness(genImg &img, vector<colorTable> &colorT);
-    void calcNFitness(genImg &img, int i, int colID, int nCol, float &fitness, float inc, vector<colorTable> &colorT);
+    void findRelations(genImg &img);
+    int findColor(int col);
+    void findNColor(int colID, int nCol);
+    float calcFitness(genImg &img);
+    //void calcNFitness(genImg &img, int i, int colID, int nCol, float &fitness, float inc);
+    void calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float &fitness, float inc);
     
     vector<ofVec2f> nPos;
+    vector<colorTable> colorT;
     
     bool count;
-    
     int numN;
 };
