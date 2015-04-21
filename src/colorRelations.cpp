@@ -21,7 +21,7 @@
 
 
 //--------------------------------------------------------------
-void colorRelations::setup(){
+void colorRelations::setup(int colorTableSize){
     //setup neighbor positions
     nPos.assign(8, ofVec2f(0,0));
     
@@ -34,7 +34,12 @@ void colorRelations::setup(){
     nPos[6].set(0, 1); // bottom
     nPos[7].set(1, 1); // bottom right
     
-    numN = 0;
+    for (int i = 0; i < colorTableSize; i++) {
+        colorTable temp;
+        temp.mainColor = i;
+        colorT.push_back(temp);
+    }
+
 }
 
 //--------------------------------------------------------------

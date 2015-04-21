@@ -18,7 +18,7 @@ struct colorTable {
 
 class colorRelations {
 public:
-    void setup();
+    void setup(int colorTableSize);
     void findRelations(genImg &img);
     int findColor(int col);
     void findNColor(int colID, int nCol);

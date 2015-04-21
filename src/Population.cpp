@@ -65,14 +65,7 @@ Population::Population(float m, int num, string imgPath) {
         }
     }
     
-    // add all colors to colrtable
-    for (int i = 0; i < imgColors.size(); i++) {
-        colorTable temp;
-        temp.mainColor = i;
-        CR.colorT.push_back(temp);
-    }
-    
-    CR.setup();
+    CR.setup(imgColors.size());
     CR.findRelations(srcDNA);
     
     for (int i = 0; i < num; i++) {
@@ -183,13 +176,10 @@ void Population::reproduction() {
         // Get their genes
         DNA momgenes = mom.getDNA();
         DNA dadgenes = dad.getDNA();
-                // Mate their genes
+        // Mate their genes Mutate their genes
         DNA child = momgenes.crossover(dadgenes, mutationRate);
-        // Mutate their genes
-//        child.mutate(mutationRate);
         // Fill the new population with the new child
         population[i].dna = child;
-        //population[i].expressGenes(imgColors);
     }
                    
     generations++;
@@ -201,48 +191,8 @@ void Population::calcFitness(){
     int end = population.size();
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
-        
         population[i].fitness = CR.calcFitness(population[i]);
-        
-        /*
-        //make an empty colortable
-        vector<colorTable> genImgColors;
-        for (int i = 0; i < imgColors.size(); i++) {
-            colorTable temp;
-            //temp.mainColor = i;
-            genImgColors.push_back(temp);
-        }
-        
-        //find relations of pop[i]
-        CR.findRelations(population[i], genImgColors);
-        
-        population[i].fitness = 0;
-        float correct = 0;
-        
-        
-        //calc fitness
-        for (int c = 0; c < colorTables.size(); c++){
-            for (int gnc = 0; gnc < genImgColors[c].neighborColors.size(); gnc++){
-                int gnCol = genImgColors[c].neighborColors[gnc];
-                bool gnColFound = false;
-                
-                for (int nc = 0; nc < colorTables[c].neighborColors.size(); nc++){
-                    if (colorTables[c].neighborColors[nc] == gnCol){
-                        gnColFound = true;
-                        correct++; //plus one for every similar relationship
-                        break;
-                    }
-                }
-                
-                if (!gnColFound) {
-                    correct -= genImgColors[c].neighborCount[gnc] * 0.05; //minus 0.05 for every difference
-                }
-            }
-        }
-        
-        population[i].fitness = correct;*/
     });
-        
 }
 
 
