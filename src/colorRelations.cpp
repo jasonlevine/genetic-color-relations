@@ -192,7 +192,7 @@ float colorRelations::calcFitness(genImg &img){
     int w = img.img.getWidth();
     int h = img.img.getHeight();
     
-    float fitness = 0.0;
+    img.fitness = 0.0;
     img.dna.geneFitness.assign(w*h, 0.0);
     
     
@@ -204,22 +204,22 @@ float colorRelations::calcFitness(genImg &img){
     
     //top right corner
     ofVec2f trc = ofVec2f(w-1, 0);
-    calcNFitness(img, tlc, left, fitness, 0.33333);
-    calcNFitness(img, tlc, bottomLeft, fitness, 0.33333);
-    calcNFitness(img, tlc, bottom, fitness, 0.33333);
+    calcNFitness(img, trc, left, fitness, 0.33333);
+    calcNFitness(img, trc, bottomLeft, fitness, 0.33333);
+    calcNFitness(img, trc, bottom, fitness, 0.33333);
 
     
     //bottom left corner
     ofVec2f blc = ofVec2f(0, h-1);
-    calcNFitness(img, tlc, right, fitness, 0.33333);
-    calcNFitness(img, tlc, topRight, fitness, 0.33333);
-    calcNFitness(img, tlc, top, fitness, 0.33333);
+    calcNFitness(img, blc, right, fitness, 0.33333);
+    calcNFitness(img, blc, topRight, fitness, 0.33333);
+    calcNFitness(img, blc, top, fitness, 0.33333);
     
     //bottom right corner
     ofVec2f brc = ofVec2f(w-1, h-1);
-    calcNFitness(img, tlc, left, fitness, 0.33333);
-    calcNFitness(img, tlc, topLeft, fitness, 0.33333);
-    calcNFitness(img, tlc, top, fitness, 0.33333);
+    calcNFitness(img, brc, left, fitness, 0.33333);
+    calcNFitness(img, brc, topLeft, fitness, 0.33333);
+    calcNFitness(img, brc, top, fitness, 0.33333);
     
     //    float t2 = t;
     //top edge
@@ -270,7 +270,7 @@ float colorRelations::calcFitness(genImg &img){
         }
     }
     
-    return fitness;
+    //return fitness;
 }
 
 void colorRelations::calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float &fitness, float inc){

@@ -170,6 +170,7 @@ void Population::reproduction() {
     // Refill the population with children from the mating pool
     for (int i = 0; i < population.size(); i++) {
         // Sping the wheel of fortune to pick two parents
+        float t1 = ofGetElapsedTimef();
         int m = int(ofRandom(matingPool.size()));
         int d = int(ofRandom(matingPool.size()));
         // Pick two parents
@@ -178,8 +179,13 @@ void Population::reproduction() {
         // Get their genes
         DNA momgenes = mom.getDNA();
         DNA dadgenes = dad.getDNA();
+        cout << "-----------------------" << endl;
+        cout << "pick parents " << ofGetElapsedTimef() - t1 << endl;
         // Mate their genes Mutate their genes
+        
+        float t2 = ofGetElapsedTimef();
         DNA child = momgenes.crossover(dadgenes, mutationRate);
+        cout << "crossover " << ofGetElapsedTimef() - t2 << endl;
         // Fill the new population with the new child
         population[i].dna = child;
     }
