@@ -144,7 +144,9 @@ void Population::selection() {
     float minFitness = getMinFitness();
 
     if (maxFitness == minFitness){
-        matingPool = population;
+        for (int i = 0; i < population.size(); i++) {
+            matingPool.push_back(i);
+        }
     }
     else {
         for (int i = 0; i < population.size(); i++) {
@@ -157,7 +159,7 @@ void Population::selection() {
             int n = (int) (fitnessNormal * 100);  // Arbitrary multiplier
 //            cout << "n = " << n << endl;
             for (int j = 0; j < n; j++) {
-                matingPool.push_back(population[i]);
+                matingPool.push_back(i);
             }
         }
     }
@@ -171,8 +173,8 @@ void Population::reproduction() {
         int m = int(ofRandom(matingPool.size()));
         int d = int(ofRandom(matingPool.size()));
         // Pick two parents
-        genImg mom = matingPool[m];
-        genImg dad = matingPool[d];
+        genImg mom = population[matingPool[m]];
+        genImg dad = population[matingPool[d]];
         // Get their genes
         DNA momgenes = mom.getDNA();
         DNA dadgenes = dad.getDNA();

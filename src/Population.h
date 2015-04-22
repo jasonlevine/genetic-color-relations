@@ -53,7 +53,7 @@ public:
     
     float mutationRate;          // Mutation rate
     vector<genImg> population;   // array to hold the current population
-    vector<genImg> matingPool;   // ArrayList which we will use for our "mating pool"
+    vector<int> matingPool;   // ArrayList which we will use for our "mating pool"
     int generations;             // Number of generations
     
     ofImage srcImg, heatmap;

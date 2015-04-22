@@ -29,19 +29,19 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     if (GA->getMaxFitness() < GA->perfectScore) {
-//        float t1 = ofGetElapsedTimef();
+        float t1 = ofGetElapsedTimef();
         GA->selection();
-//        cout << "------------------" << endl;
-//        cout << "selection - " << ofGetElapsedTimef() - t1<< endl;
+        cout << "------------------" << endl;
+        cout << "selection - " << ofGetElapsedTimef() - t1<< endl;
         
-//        float t2 = ofGetElapsedTimef();
+        float t2 = ofGetElapsedTimef();
         GA->reproduction();
-//        cout << "reproduction - " << ofGetElapsedTimef() - t2 << endl;
+        cout << "reproduction - " << ofGetElapsedTimef() - t2 << endl;
         
         
-//        float t3 = ofGetElapsedTimef();
+        float t3 = ofGetElapsedTimef();
         GA->calcFitness();
-//        cout << "fitness - " << ofGetElapsedTimef() - t3 << endl;
+        cout << "fitness - " << ofGetElapsedTimef() - t3 << endl;
         
         
         elapsedTime = ofGetElapsedTimef();

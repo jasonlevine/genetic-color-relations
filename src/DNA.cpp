@@ -53,7 +53,7 @@ DNA DNA::crossover(DNA partner, float mutationRate){ //crossover + mutate
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
 
-        if (ofRandomuf() < mutationRate * geneFitness[i] + mutationRate) { //the worse the fitness the higher the mutation rate
+        if (ofRandomuf() < mutationRate){// * geneFitness[i] + mutationRate) { //the worse the fitness the higher the mutation rate
             genes[i] = ofRandom(nColors);
         }
         else {
