@@ -22,9 +22,9 @@ public:
     void findRelations(genImg &img);
     int findColor(int col);
     void findNColor(int colID, int nCol);
-    float calcFitness(genImg &img);
+    void calcFitness(genImg &img);
     //void calcNFitness(genImg &img, int i, int colID, int nCol, float &fitness, float inc);
-    void calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float &fitness, float inc);
+    void calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float inc);
     
     vector<ofVec2f> nPos;
     vector<colorTable> colorT;

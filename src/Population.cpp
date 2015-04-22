@@ -72,7 +72,7 @@ Population::Population(float m, int num, string imgPath) {
         population.push_back(genImg(srcImg, 1, imgColors.size()));
     }
 
-    perfectScore = population[0].img.width * population[0].img.height;
+    perfectScore = population[0].img.width * population[0].img.height - 0.1;
 }
 
 #pragma mark draw-routines
@@ -170,22 +170,21 @@ void Population::reproduction() {
     // Refill the population with children from the mating pool
     for (int i = 0; i < population.size(); i++) {
         // Sping the wheel of fortune to pick two parents
-        float t1 = ofGetElapsedTimef();
+//        float t1 = ofGetElapsedTimef();
         int m = int(ofRandom(matingPool.size()));
         int d = int(ofRandom(matingPool.size()));
-        // Pick two parents
-        genImg mom = population[matingPool[m]];
-        genImg dad = population[matingPool[d]];
-        // Get their genes
-        DNA momgenes = mom.getDNA();
-        DNA dadgenes = dad.getDNA();
-        cout << "-----------------------" << endl;
-        cout << "pick parents " << ofGetElapsedTimef() - t1 << endl;
+        // Pick two parents  Get their genes
+        DNA momgenes = population[matingPool[m]].getDNA();
+        DNA dadgenes = population[matingPool[d]].getDNA();
+        
+        
+//        cout << "-----------------------" << endl;
+//        cout << "pick parents " << ofGetElapsedTimef() - t1 << endl;
         // Mate their genes Mutate their genes
         
-        float t2 = ofGetElapsedTimef();
+//        float t2 = ofGetElapsedTimef();
         DNA child = momgenes.crossover(dadgenes, mutationRate);
-        cout << "crossover " << ofGetElapsedTimef() - t2 << endl;
+//        cout << "crossover " << ofGetElapsedTimef() - t2 << endl;
         // Fill the new population with the new child
         population[i].dna = child;
     }
@@ -199,7 +198,7 @@ void Population::calcFitness(){
     int end = population.size();
     dispatch_apply(end-start, gcdq, ^(size_t blockIdx){
         int i = start+blockIdx;
-        population[i].fitness = CR.calcFitness(population[i]);
+        CR.calcFitness(population[i]);
     });
 }
 

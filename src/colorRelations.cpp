@@ -188,7 +188,7 @@ void colorRelations::findNColor(int colID, int nCol){
 #pragma mark fitness
 
 //--------------------------------------------------------------
-float colorRelations::calcFitness(genImg &img){
+void colorRelations::calcFitness(genImg &img){
     int w = img.img.getWidth();
     int h = img.img.getHeight();
     
@@ -198,74 +198,74 @@ float colorRelations::calcFitness(genImg &img){
     
     //top left corner
     ofVec2f tlc = ofVec2f(0, 0);
-    calcNFitness(img, tlc, right, fitness, 0.33333);
-    calcNFitness(img, tlc, bottomRight, fitness, 0.33333);
-    calcNFitness(img, tlc, bottom, fitness, 0.33333);
+    calcNFitness(img, tlc, right, 0.33333);
+    calcNFitness(img, tlc, bottomRight, 0.33333);
+    calcNFitness(img, tlc, bottom, 0.33333);
     
     //top right corner
     ofVec2f trc = ofVec2f(w-1, 0);
-    calcNFitness(img, trc, left, fitness, 0.33333);
-    calcNFitness(img, trc, bottomLeft, fitness, 0.33333);
-    calcNFitness(img, trc, bottom, fitness, 0.33333);
+    calcNFitness(img, trc, left, 0.33333);
+    calcNFitness(img, trc, bottomLeft, 0.33333);
+    calcNFitness(img, trc, bottom, 0.33333);
 
     
     //bottom left corner
     ofVec2f blc = ofVec2f(0, h-1);
-    calcNFitness(img, blc, right, fitness, 0.33333);
-    calcNFitness(img, blc, topRight, fitness, 0.33333);
-    calcNFitness(img, blc, top, fitness, 0.33333);
+    calcNFitness(img, blc, right, 0.33333);
+    calcNFitness(img, blc, topRight, 0.33333);
+    calcNFitness(img, blc, top, 0.33333);
     
     //bottom right corner
     ofVec2f brc = ofVec2f(w-1, h-1);
-    calcNFitness(img, brc, left, fitness, 0.33333);
-    calcNFitness(img, brc, topLeft, fitness, 0.33333);
-    calcNFitness(img, brc, top, fitness, 0.33333);
+    calcNFitness(img, brc, left, 0.33333);
+    calcNFitness(img, brc, topLeft, 0.33333);
+    calcNFitness(img, brc, top, 0.33333);
     
     //    float t2 = t;
     //top edge
     for (int x = 1; x < w-1; x++){
         ofVec2f topEdge(x, 0);
-        calcNFitness(img, topEdge, left, fitness, 0.2);
-        calcNFitness(img, topEdge, bottomLeft, fitness, 0.2);
-        calcNFitness(img, topEdge, bottom, fitness, 0.2);
-        calcNFitness(img, topEdge, bottomRight, fitness, 0.2);
-        calcNFitness(img, topEdge, right, fitness, 0.2);
+        calcNFitness(img, topEdge, left, 0.2);
+        calcNFitness(img, topEdge, bottomLeft, 0.2);
+        calcNFitness(img, topEdge, bottom, 0.2);
+        calcNFitness(img, topEdge, bottomRight, 0.2);
+        calcNFitness(img, topEdge, right, 0.2);
     }
     
     //left edge
     for (int y = 1; y < h-1; y++){
         ofVec2f leftEdge(0, y);
-        calcNFitness(img, leftEdge, bottom, fitness, 0.2);
-        calcNFitness(img, leftEdge, bottomRight, fitness, 0.2);
-        calcNFitness(img, leftEdge, right, fitness, 0.2);
-        calcNFitness(img, leftEdge, topRight, fitness, 0.2);
-        calcNFitness(img, leftEdge, top, fitness, 0.2);
+        calcNFitness(img, leftEdge, bottom, 0.2);
+        calcNFitness(img, leftEdge, bottomRight, 0.2);
+        calcNFitness(img, leftEdge, right, 0.2);
+        calcNFitness(img, leftEdge, topRight, 0.2);
+        calcNFitness(img, leftEdge, top, 0.2);
     }
     
     //bottom edge
     for (int x = 1; x < w-1; x++){
         ofVec2f bottomEdge(x, h-1);
-        calcNFitness(img, bottomEdge, right, fitness, 0.2);
-        calcNFitness(img, bottomEdge, topRight, fitness, 0.2);
-        calcNFitness(img, bottomEdge, top, fitness, 0.2);
-        calcNFitness(img, bottomEdge, topLeft, fitness, 0.2);
-        calcNFitness(img, bottomEdge, left, fitness, 0.2);
+        calcNFitness(img, bottomEdge, right, 0.2);
+        calcNFitness(img, bottomEdge, topRight, 0.2);
+        calcNFitness(img, bottomEdge, top, 0.2);
+        calcNFitness(img, bottomEdge, topLeft, 0.2);
+        calcNFitness(img, bottomEdge, left, 0.2);
     }
     
     //right edge
     for (int y = 1; y < h-1; y++){
         ofVec2f rightEdge(w-1, y);
-        calcNFitness(img, rightEdge, top, fitness, 0.2);
-        calcNFitness(img, rightEdge, topLeft, fitness, 0.2);
-        calcNFitness(img, rightEdge, left, fitness, 0.2);
-        calcNFitness(img, rightEdge, bottomLeft, fitness, 0.2);
-        calcNFitness(img, rightEdge, bottom, fitness, 0.2);
+        calcNFitness(img, rightEdge, top, 0.2);
+        calcNFitness(img, rightEdge, topLeft, 0.2);
+        calcNFitness(img, rightEdge, left, 0.2);
+        calcNFitness(img, rightEdge, bottomLeft, 0.2);
+        calcNFitness(img, rightEdge, bottom, 0.2);
     }
     
     for (int y = 1; y < h-1; y++){
         for (int x = 1; x < w-1; x++){
             for (int n = 0; n < nPos.size(); n++){
-                calcNFitness(img, ofVec2f(x,y), nPos[n], fitness, 0.125);
+                calcNFitness(img, ofVec2f(x,y), nPos[n], 0.125);
             }
         }
     }
@@ -273,7 +273,7 @@ float colorRelations::calcFitness(genImg &img){
     //return fitness;
 }
 
-void colorRelations::calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float &fitness, float inc){
+void colorRelations::calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float inc){
     int colID = img.getColor(pos.x, pos.y);
     int nCol = img.getColor(pos.x + npos.x, pos.y + npos.y);
     int i = pos.x + pos.y * img.img.width;
@@ -281,7 +281,7 @@ void colorRelations::calcNFitness(genImg &img, ofVec2f pos, ofVec2f npos, float 
     for (int nc = 0; nc < colorT[colID].neighborColors.size(); nc++){
         if (colorT[colID].neighborColors[nc] == nCol){
             img.dna.geneFitness[i] += inc;
-            fitness += inc;
+            img.fitness += inc;
             break;
         }
     }
